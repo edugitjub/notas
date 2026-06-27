@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de notas — Aprendizaje Humano y Pensamiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #ffffff;
+      --bg-surface:  #f5f5f3;
+      --bg-info:     #e6f1fb;
+      --bg-success:  #eaf3de;
+      --bg-warning:  #faeeda;
+      --bg-danger:   #fcebeb;
+      --text:        #1a1a18;
+      --text-muted:  #5f5e5a;
+      --text-hint:   #888780;
+      --border:      rgba(0,0,0,0.10);
+      --border-md:   rgba(0,0,0,0.18);
+      --purple:      #534AB7;
+      --teal:        #1D9E75;
+      --amber:       #BA7517;
+      --red:         #E24B4A;
+      --purple-text: #3C3489;
+      --teal-text:   #27500A;
+      --amber-text:  #633806;
+      --red-text:    #791F1F;
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   14px;
+      --font:        'Inter', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          #1c1c1a;
+        --bg-surface:  #252522;
+        --bg-info:     #0c2240;
+        --bg-success:  #0f2a10;
+        --bg-warning:  #2a1c04;
+        --bg-danger:   #2a0c0c;
+        --text:        #f0efea;
+        --text-muted:  #b4b2a9;
+        --text-hint:   #888780;
+        --border:      rgba(255,255,255,0.10);
+        --border-md:   rgba(255,255,255,0.18);
+        --purple:      #AFA9EC;
+        --teal:        #5DCAA5;
+        --amber:       #EF9F27;
+        --red:         #F09595;
+        --purple-text: #CECBF6;
+        --teal-text:   #9FE1CB;
+        --amber-text:  #FAC775;
+        --red-text:    #F7C1C1;
+      }
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .widget {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .course-name { font-size: 17px; font-weight: 600; }
+    .course-meta { font-size: 13px; color: var(--text-muted); }
+
+    /* ── Progress bar ── */
+    .progress-section { margin-bottom: 1.5rem; }
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .progress-label { font-size: 13px; color: var(--text-muted); }
+    .progress-right { display: flex; align-items: baseline; gap: 8px; }
+    .progress-score { font-size: 24px; font-weight: 600; }
+    .progress-score sub { font-size: 13px; font-weight: 400; color: var(--text-muted); }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+    .badge-pending  { background: var(--bg-surface); color: var(--text-muted); }
+    .badge-pass     { background: var(--bg-success); color: var(--teal-text); }
+    .badge-fail     { background: var(--bg-danger);  color: var(--red-text); }
+    .badge-blocked  { background: var(--bg-warning); color: var(--amber-text); }
+
+    .bar-wrap {
+      position: relative;
+      margin-top: 22px;
+      margin-bottom: 10px;
+    }
+    .bar-track {
+      width: 100%;
+      height: 18px;
+      background: var(--bg-surface);
+      border-radius: 9px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill { display: flex; height: 100%; }
+    .bar-segment { height: 100%; transition: width 0.35s ease; }
+    .seg-teoria   { background: var(--purple); }
+    .seg-pract    { background: var(--teal); }
+    .seg-extra    { background: var(--amber); }
+
+    .threshold {
+      position: absolute;
+      top: -18px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+    .threshold-label {
+      font-size: 10px;
+      font-weight: 500;
+      white-space: nowrap;
+      margin-bottom: 2px;
+    }
+    .threshold-line {
+      width: 2px;
+      height: 18px;
+    }
+    .th-aprobado .threshold-label { color: var(--red-text); }
+    .th-aprobado .threshold-line  { background: var(--red); }
+    .th-examen   .threshold-label { color: var(--amber-text); }
+    .th-examen   .threshold-line  { background: var(--amber); opacity: 0.8; }
+
+    .bar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Alerts ── */
+    .alert {
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 1rem;
+      display: none;
+      line-height: 1.5;
+    }
+    .alert.show { display: block; }
+    .alert-blocked { background: var(--bg-warning); color: var(--amber-text); border: 0.5px solid var(--amber); }
+    .alert-pass    { background: var(--bg-success); color: var(--teal-text);  border: 0.5px solid var(--teal); }
+    .alert-fail    { background: var(--bg-danger);  color: var(--red-text);   border: 0.5px solid var(--red); }
+
+    /* ── Cards grid ── */
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .card-title { font-size: 14px; font-weight: 500; }
+    .card-sub   { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .card-pts   { font-size: 21px; font-weight: 600; text-align: right; white-space: nowrap; }
+    .card-pts sub { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+
+    /* ── Form fields ── */
+    .field { margin-bottom: 12px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 7px 10px;
+      font-size: 14px;
+      font-family: var(--font);
+      background: var(--bg-surface);
+      color: var(--text);
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(83,74,183,0.15);
+    }
+    input::placeholder { color: var(--text-hint); }
+    .field-hint { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
+
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .q-grid input { text-align: center; }
+
+    .divider { height: 0.5px; background: var(--border); margin: 12px 0; }
+
+    /* ── Desglose ── */
+    .desglose { font-size: 12px; color: var(--text-muted); line-height: 1.9; }
+    .desglose strong { color: var(--text); font-weight: 500; }
+
+    /* ── Final row ── */
+    .final-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0 4px;
+      border-top: 0.5px solid var(--border-md);
+      margin-top: 4px;
+    }
+    .final-label { font-size: 15px; color: var(--text-muted); }
+    .final-score { font-size: 32px; font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      body { padding: 1rem 0.75rem; }
+      .sections { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="widget">
+
+  <div class="header-row">
+    <span class="course-name">Aprendizaje Humano y Pensamiento</span>
+    <span class="course-meta">Convocatoria ordinaria — junio 2027</span>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-section">
+    <div class="progress-label-row">
+      <span class="progress-label">Nota acumulada</span>
+      <div class="progress-right">
+        <span class="progress-score" id="total-display">—<sub> / 10</sub></span>
+        <span class="badge badge-pending" id="badge-main">pendiente</span>
+      </div>
+    </div>
+    <div class="bar-wrap">
+      <div class="threshold th-aprobado" style="left:50%">
+        <span class="threshold-label">aprobado (5,0)</span>
+        <div class="threshold-line"></div>
+      </div>
+      <div class="threshold th-examen" style="left:40%">
+        <span class="threshold-label">umbral examen (4,0)</span>
+        <div class="threshold-line"></div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill">
+          <div class="bar-segment seg-teoria" id="seg-teoria" style="width:0%"></div>
+          <div class="bar-segment seg-pract"  id="seg-pract"  style="width:0%"></div>
+          <div class="bar-segment seg-extra"  id="seg-extra"  style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bar-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span>Teoría</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>Prácticas</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Bono experimentos</span>
+    </div>
+  </div>
+
+  <!-- Alertas -->
+  <div id="alert-blocked" class="alert alert-blocked">
+    ⚠ El examen de junio no supera el umbral de 4/10. No se computan ni prácticas ni evaluación continua. La asignatura queda suspensa.
+  </div>
+  <div id="alert-pass" class="alert alert-pass">
+    ✓ <span id="alert-pass-text">Asignatura aprobada.</span>
+  </div>
+  <div id="alert-fail" class="alert alert-fail">
+    ✗ <span id="alert-fail-text">Todavía por debajo del aprobado.</span>
+  </div>
+
+  <!-- Fila superior: examen + evaluación continua -->
+  <div class="sections">
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Examen de junio</div>
+          <div class="card-sub">Condición necesaria: mínimo 4 / 10</div>
+        </div>
+        <div class="card-pts" id="pts-examen">—<sub> pts</sub></div>
+      </div>
+      <div class="field">
+        <label for="inp-examen">Nota del examen (0 – 10)</label>
+        <input type="number" id="inp-examen" min="0" max="10" step="0.1" placeholder="Introduce tu nota">
+        <p class="field-hint">Determina el peso de los puntos de teoría no cubiertos por la EC</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Evaluación continua</div>
+          <div class="card-sub">Hasta 3 pts de teoría</div>
+        </div>
+        <div class="card-pts" id="pts-ec">0,00<sub> pts</sub></div>
+      </div>
+
+      <div class="field">
+        <label>Cuestionarios por tema (0 – 10 cada uno) — hasta 2,4 pts</label>
+        <div class="q-grid">
+          <input type="number" id="q1" min="0" max="10" step="0.1" placeholder="T1">
+          <input type="number" id="q2" min="0" max="10" step="0.1" placeholder="T2">
+          <input type="number" id="q3" min="0" max="10" step="0.1" placeholder="T3">
+          <input type="number" id="q4" min="0" max="10" step="0.1" placeholder="T4">
+          <input type="number" id="q5" min="0" max="10" step="0.1" placeholder="T5">
+          <input type="number" id="q6" min="0" max="10" step="0.1" placeholder="T6">
+        </div>
+        <p class="field-hint">Media de los cuestionarios introducidos: <strong id="media-q">—</strong></p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <label for="inp-asistencia">Porcentaje de controles de asistencia superados</label>
+        <input type="number" id="inp-asistencia" min="0" max="100" step="1" placeholder="Ej: 75">
+        <p class="field-hint">0,6 × (% / 100) = hasta 0,6 pts</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Fila inferior: prácticas + bono -->
+  <div class="sections">
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Prácticas</div>
+          <div class="card-sub">Hasta 3 pts — requiere examen ≥ 4</div>
+        </div>
+        <div class="card-pts" id="pts-pract">0,00<sub> pts</sub></div>
+      </div>
+      <div class="field">
+        <label for="inp-a1">Actividad 1 — informe individual (0 – 0,7)</label>
+        <input type="number" id="inp-a1" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+      </div>
+      <div class="field">
+        <label for="inp-a2">Actividad 2 — informe grupal (0 – 0,7)</label>
+        <input type="number" id="inp-a2" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+      </div>
+      <div class="field">
+        <label for="inp-a3">Actividad 3 — examen presencial (0 – 0,7)</label>
+        <input type="number" id="inp-a3" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+      </div>
+      <div class="field">
+        <label for="inp-a4">Actividad 4 — examen presencial (0 – 0,7)</label>
+        <input type="number" id="inp-a4" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+      </div>
+      <div class="field">
+        <label for="inp-a5">Actividad 5 — asistencia y participación (0 – 0,2)</label>
+        <input type="number" id="inp-a5" min="0" max="0.2" step="0.01" placeholder="Nota sobre 0,2">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Bono experimentos</div>
+          <div class="card-sub">Hasta 0,5 pts — solo si ya aprobado</div>
+        </div>
+        <div class="card-pts" id="pts-extra">0,00<sub> pts</sub></div>
+      </div>
+      <div class="field">
+        <label for="inp-exp">Experimentos completados (0 – 5)</label>
+        <input type="number" id="inp-exp" min="0" max="5" step="1" placeholder="Número de experimentos">
+        <p class="field-hint">0,1 pts por experimento. Solo opera una vez aprobada la asignatura.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="desglose">
+        <div>EC asegurada: <strong id="info-ec">0,00 pts</strong></div>
+        <div>Aportación del examen: <strong id="info-examen">—</strong></div>
+        <div style="border-top: 0.5px solid var(--border); margin: 6px 0;"></div>
+        <div>Total teoría: <strong id="info-teoria">—</strong> / 7 pts</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Nota final -->
+  <div class="final-row">
+    <span class="final-label">Calificación final</span>
+    <span class="final-score" id="final-score">—</span>
+  </div>
+
+</div>
+
+<script>
+  const fields = ['inp-examen','q1','q2','q3','q4','q5','q6','inp-asistencia',
+                  'inp-a1','inp-a2','inp-a3','inp-a4','inp-a5','inp-exp'];
+  fields.forEach(id => document.getElementById(id).addEventListener('input', recalc));
+
+  function v(id) {
+    const n = parseFloat(document.getElementById(id).value);
+    return isNaN(n) ? null : n;
+  }
+  function clamp(x, lo, hi) { return Math.min(hi, Math.max(lo, x)); }
+  function fmt(n) { return n.toFixed(2).replace('.', ','); }
+
+  function recalc() {
+    const examen = v('inp-examen');
+    const qs = ['q1','q2','q3','q4','q5','q6'].map(id => v(id)).filter(x => x !== null);
+    const asist = v('inp-asistencia');
+    const prs = ['inp-a1','inp-a2','inp-a3','inp-a4','inp-a5'].map(id => v(id));
+
+    const mediaQ = qs.length ? qs.reduce((a,b)=>a+b,0)/qs.length : null;
+    document.getElementById('media-q').textContent = mediaQ !== null ? fmt(mediaQ) : '—';
+
+    const ecQ = mediaQ !== null ? clamp((mediaQ/10)*2.4, 0, 2.4) : 0;
+    const ecA = asist  !== null ? clamp((asist/100)*0.6, 0, 0.6) : 0;
+    const ec  = ecQ + ecA;
+
+    document.getElementById('pts-ec').innerHTML  = fmt(ec)  + '<sub> pts</sub>';
+    document.getElementById('info-ec').textContent = fmt(ec) + ' pts';
+
+    const pract = clamp(prs.reduce((s,x) => s + (x !== null ? x : 0), 0), 0, 3);
+    document.getElementById('pts-pract').innerHTML = fmt(pract) + '<sub> pts</sub>';
+
+    const expN  = v('inp-exp');
+
+    let teoria = null, finalBase = null, finalTotal = null;
+    let blocked = false;
+
+    if (examen !== null) {
+      const ex = clamp(examen, 0, 10);
+      if (ex < 4) {
+        blocked = true;
+        document.getElementById('pts-examen').innerHTML = fmt(ex) + '<sub> pts</sub>';
+        document.getElementById('info-examen').textContent = '—';
+        document.getElementById('info-teoria').textContent  = '—';
+        document.getElementById('pts-extra').innerHTML = '0,00<sub> pts</sub>';
+      } else {
+        const aportExamen = (ex/10) * (7 - ec);
+        teoria     = ec + aportExamen;
+        finalBase  = teoria + pract;
+        const expPts = expN !== null ? clamp(expN,0,5)*0.1 : 0;
+        finalTotal = finalBase >= 5 ? Math.min(10, finalBase + expPts) : finalBase;
+
+        document.getElementById('pts-examen').innerHTML  = fmt(ex) + '<sub> pts</sub>';
+        document.getElementById('info-examen').textContent = fmt(aportExamen) + ' pts';
+        document.getElementById('info-teoria').textContent = fmt(teoria);
+        document.getElementById('pts-extra').innerHTML  =
+          (finalBase >= 5 ? fmt(expPts) : '0,00') + '<sub> pts</sub>';
+      }
+    } else {
+      document.getElementById('pts-examen').innerHTML  = '—<sub> pts</sub>';
+      document.getElementById('info-examen').textContent = '—';
+      document.getElementById('info-teoria').textContent  = '—';
+      document.getElementById('pts-extra').innerHTML = '0,00<sub> pts</sub>';
+    }
+
+    document.getElementById('alert-blocked').classList.toggle('show', blocked);
+
+    let badgeClass = 'badge-pending', badgeText = 'pendiente';
+    let showPass = false, showFail = false;
+    let totalTxt = '—';
+    let sT = 0, sP = 0, sE = 0;
+
+    if (blocked) {
+      badgeClass = 'badge-blocked'; badgeText = 'bloqueado';
+      totalTxt = 'bloqueado';
+    } else if (finalTotal !== null) {
+      totalTxt = fmt(finalTotal);
+      sT = Math.min(teoria, 7) / 10 * 100;
+      sP = pract / 10 * 100;
+      if (finalBase >= 5) {
+        const expPts = expN !== null ? clamp(expN,0,5)*0.1 : 0;
+        sE = expPts / 10 * 100;
+      }
+      if (finalTotal >= 5) {
+        const nota = finalTotal;
+        badgeText  = nota >= 9 ? 'sobresaliente' : nota >= 7 ? 'notable' : nota >= 6 ? 'bien' : 'aprobado';
+        badgeClass = 'badge-pass';
+        showPass   = true;
+      } else {
+        badgeClass = 'badge-fail'; badgeText = 'suspenso';
+        showFail   = true;
+      }
+    } else if (ec > 0 || pract > 0) {
+      sT = ec / 10 * 100;
+      sP = pract / 10 * 100;
+    }
+
+    document.getElementById('seg-teoria').style.width = sT.toFixed(1) + '%';
+    document.getElementById('seg-pract').style.width  = sP.toFixed(1) + '%';
+    document.getElementById('seg-extra').style.width  = sE.toFixed(1) + '%';
+
+    document.getElementById('total-display').innerHTML = totalTxt + '<sub> / 10</sub>';
+    document.getElementById('final-score').textContent = totalTxt;
+    const badge = document.getElementById('badge-main');
+    badge.className = 'badge ' + badgeClass;
+    badge.textContent = badgeText;
+
+    document.getElementById('alert-pass').classList.toggle('show', showPass);
+    document.getElementById('alert-fail').classList.toggle('show', showFail && !blocked);
+
+    if (showPass) {
+      const extra = finalTotal - finalBase;
+      document.getElementById('alert-pass-text').textContent = extra > 0.001
+        ? 'Asignatura aprobada. El bono de experimentos ha sumado ' + fmt(extra) + ' pts.'
+        : 'Asignatura aprobada.';
+    }
+    if (showFail && !blocked) {
+      const falta = 5 - (finalBase || 0);
+      document.getElementById('alert-fail-text').textContent =
+        'Faltan ' + fmt(falta) + ' pts para el aprobado. El bono de experimentos no puede aplicarse hasta superar el 5.';
+    }
+  }
+</script>
+</body>
+</html>
