@@ -71,7 +71,6 @@
 
     .widget { max-width: 760px; margin: 0 auto; }
 
-    /* Header */
     .header-row {
       display: flex;
       align-items: baseline;
@@ -83,7 +82,6 @@
     .course-name { font-size: 17px; font-weight: 600; }
     .course-meta { font-size: 13px; color: var(--text-muted); }
 
-    /* Badge */
     .badge {
       display: inline-block;
       font-size: 11px;
@@ -96,7 +94,6 @@
     .badge-fail    { background: var(--bg-danger);  color: var(--red-text); }
     .badge-blocked { background: var(--bg-warning); color: var(--amber-text); }
 
-    /* Progress bar */
     .progress-section { margin-bottom: 1.5rem; }
     .progress-label-row {
       display: flex;
@@ -117,7 +114,6 @@
       background: var(--bg-surface);
       border-radius: 9px;
       overflow: hidden;
-      position: relative;
     }
     .bar-fill { display: flex; height: 100%; }
     .bar-segment { height: 100%; transition: width 0.35s ease; }
@@ -125,11 +121,9 @@
     .seg-pract  { background: var(--teal); }
     .seg-extra  { background: var(--amber); }
 
-    /* Threshold markers BELOW the bar */
     .bar-markers {
       position: relative;
       height: 28px;
-      margin-top: 0;
     }
     .marker {
       position: absolute;
@@ -140,16 +134,8 @@
       align-items: center;
       pointer-events: none;
     }
-    .marker-line {
-      width: 1.5px;
-      height: 8px;
-    }
-    .marker-label {
-      font-size: 10px;
-      font-weight: 500;
-      white-space: nowrap;
-      margin-top: 2px;
-    }
+    .marker-line { width: 1.5px; height: 8px; }
+    .marker-label { font-size: 10px; font-weight: 500; white-space: nowrap; margin-top: 2px; }
     .mk-aprobado .marker-line  { background: var(--red); }
     .mk-aprobado .marker-label { color: var(--red-text); }
     .mk-examen   .marker-line  { background: var(--amber); }
@@ -161,16 +147,9 @@
       gap: 14px;
       margin-top: 4px;
     }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-    /* Alerts */
     .alert {
       border-radius: var(--radius-md);
       padding: 10px 14px;
@@ -184,7 +163,6 @@
     .alert-pass    { background: var(--bg-success); color: var(--teal-text);  border: 0.5px solid var(--teal); }
     .alert-fail    { background: var(--bg-danger);  color: var(--red-text);   border: 0.5px solid var(--red); }
 
-    /* Layout */
     .section-block {
       border: 0.5px solid var(--border-md);
       border-radius: var(--radius-lg);
@@ -210,25 +188,13 @@
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     }
 
-    .card {
-      padding: 1rem 1.25rem;
-      background: var(--bg);
-    }
-    .card + .card {
-      border-left: 0.5px solid var(--border);
-    }
-
+    .card { padding: 1rem 1.25rem; background: var(--bg); }
+    .card + .card { border-left: 0.5px solid var(--border); }
     .card-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text-muted); }
 
-    /* Form fields */
     .field { margin-bottom: 11px; }
     .field:last-child { margin-bottom: 0; }
-    .field label {
-      display: block;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-    }
+    .field label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
     input[type="number"] {
       width: 100%;
       padding: 7px 10px;
@@ -261,11 +227,32 @@
 
     .divider { height: 0.5px; background: var(--border); margin: 11px 0; }
 
-    /* Desglose */
     .desglose { font-size: 12px; color: var(--text-muted); line-height: 1.9; }
     .desglose strong { color: var(--text); font-weight: 500; }
 
-    /* Final row */
+    /* Bloque bono: fila horizontal compacta */
+    .bono-block {
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-lg);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .bono-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.85rem 1.25rem;
+      flex-wrap: wrap;
+    }
+    .bono-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .bono-sub   { font-size: 12px; color: var(--text-muted); }
+    .bono-field { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 200px; }
+    .bono-field label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+    .bono-field input { width: 80px; flex-shrink: 0; }
+    .bono-pts { font-size: 20px; font-weight: 600; white-space: nowrap; margin-left: auto; }
+    .bono-pts sub { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+    .bono-hint { font-size: 11px; color: var(--text-hint); }
+
     .final-row {
       display: flex;
       align-items: center;
@@ -281,6 +268,7 @@
       body { padding: 1rem 0.75rem; }
       .section-body { grid-template-columns: 1fr; }
       .card + .card { border-left: none; border-top: 0.5px solid var(--border); }
+      .bono-inner { gap: 0.75rem; }
     }
   </style>
 </head>
@@ -336,7 +324,7 @@
     ✗ <span id="alert-fail-text">Todavía por debajo del aprobado.</span>
   </div>
 
-  <!-- BLOQUE TEORÍA (examen + EC agrupados) -->
+  <!-- BLOQUE TEORÍA -->
   <div class="section-block">
     <div class="section-header">
       <div class="section-header-left">
@@ -347,7 +335,6 @@
     </div>
     <div class="section-body">
 
-      <!-- Examen -->
       <div class="card">
         <div class="card-title">Examen de junio</div>
         <div class="field">
@@ -364,7 +351,6 @@
         </div>
       </div>
 
-      <!-- Evaluación continua -->
       <div class="card">
         <div class="card-title">Evaluación continua <span style="color:var(--text-hint);font-weight:400">— hasta 3 pts asegurados</span></div>
         <div class="field">
@@ -400,7 +386,6 @@
       <span class="section-pts" id="pts-pract">0,00<sub> / 3 pts</sub></span>
     </div>
     <div class="section-body">
-
       <div class="card">
         <div class="field">
           <label for="inp-a1">Actividad 1 — informe individual (0 – 0,7)</label>
@@ -423,20 +408,22 @@
           <input type="number" id="inp-a5" min="0" max="0.2" step="0.01" placeholder="Nota sobre 0,2">
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Bono experimentos dentro del bloque prácticas como columna derecha -->
-      <div class="card">
-        <div class="card-title">Bono experimentos <span style="color:var(--text-hint);font-weight:400">— hasta 0,5 pts · solo si aprobado</span></div>
-        <div class="field">
-          <label for="inp-exp">Experimentos completados (0 – 5)</label>
-          <input type="number" id="inp-exp" min="0" max="5" step="1" placeholder="Número de experimentos">
-          <p class="field-hint">0,1 pts por experimento. Solo opera una vez superado el 5 en la nota final.</p>
-        </div>
-        <div class="field">
-          <p class="field-hint">Bono aplicado: <strong id="pts-extra">0,00 pts</strong></p>
-        </div>
+  <!-- BLOQUE BONO EXPERIMENTOS (independiente, al final) -->
+  <div class="bono-block">
+    <div class="bono-inner">
+      <div>
+        <div class="bono-label">Bono experimentos</div>
+        <div class="bono-sub">Fuente adicional de nota — solo opera si la asignatura ya está aprobada</div>
       </div>
-
+      <div class="bono-field">
+        <label for="inp-exp">Experimentos completados (0 – 5)</label>
+        <input type="number" id="inp-exp" min="0" max="5" step="1" placeholder="0">
+        <span class="bono-hint">0,1 pts c/u</span>
+      </div>
+      <div class="bono-pts" id="pts-extra">0,00<sub> pts</sub></div>
     </div>
   </div>
 
@@ -492,7 +479,7 @@
         document.getElementById('info-examen').textContent = '—';
         document.getElementById('info-teoria').textContent = '—';
         document.getElementById('pts-teoria').innerHTML    = '—<sub> / 7 pts</sub>';
-        document.getElementById('pts-extra').textContent   = '0,00 pts';
+        document.getElementById('pts-extra').innerHTML     = '0,00<sub> pts</sub>';
       } else {
         const aportExamen = (ex/10) * (7 - ec);
         teoria    = ec + aportExamen;
@@ -503,13 +490,13 @@
         document.getElementById('info-examen').textContent = fmt(aportExamen) + ' pts';
         document.getElementById('info-teoria').textContent = fmt(teoria);
         document.getElementById('pts-teoria').innerHTML    = fmt(teoria) + '<sub> / 7 pts</sub>';
-        document.getElementById('pts-extra').textContent   = (finalBase >= 5 ? fmt(expPts) : '0,00') + ' pts';
+        document.getElementById('pts-extra').innerHTML     = (finalBase >= 5 ? fmt(expPts) : '0,00') + '<sub> pts</sub>';
       }
     } else {
       document.getElementById('info-examen').textContent = '—';
       document.getElementById('info-teoria').textContent = '—';
       document.getElementById('pts-teoria').innerHTML    = '—<sub> / 7 pts</sub>';
-      document.getElementById('pts-extra').textContent   = '0,00 pts';
+      document.getElementById('pts-extra').innerHTML     = '0,00<sub> pts</sub>';
     }
 
     document.getElementById('alert-blocked').classList.toggle('show', blocked);
