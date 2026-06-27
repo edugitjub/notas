@@ -69,12 +69,9 @@
       padding: 2rem 1rem;
     }
 
-    .widget {
-      max-width: 760px;
-      margin: 0 auto;
-    }
+    .widget { max-width: 760px; margin: 0 auto; }
 
-    /* ── Header ── */
+    /* Header */
     .header-row {
       display: flex;
       align-items: baseline;
@@ -86,13 +83,26 @@
     .course-name { font-size: 17px; font-weight: 600; }
     .course-meta { font-size: 13px; color: var(--text-muted); }
 
-    /* ── Progress bar ── */
+    /* Badge */
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+    .badge-pending { background: var(--bg-surface); color: var(--text-muted); }
+    .badge-pass    { background: var(--bg-success); color: var(--teal-text); }
+    .badge-fail    { background: var(--bg-danger);  color: var(--red-text); }
+    .badge-blocked { background: var(--bg-warning); color: var(--amber-text); }
+
+    /* Progress bar */
     .progress-section { margin-bottom: 1.5rem; }
     .progress-label-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       flex-wrap: wrap;
       gap: 6px;
     }
@@ -101,23 +111,6 @@
     .progress-score { font-size: 24px; font-weight: 600; }
     .progress-score sub { font-size: 13px; font-weight: 400; color: var(--text-muted); }
 
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 20px;
-    }
-    .badge-pending  { background: var(--bg-surface); color: var(--text-muted); }
-    .badge-pass     { background: var(--bg-success); color: var(--teal-text); }
-    .badge-fail     { background: var(--bg-danger);  color: var(--red-text); }
-    .badge-blocked  { background: var(--bg-warning); color: var(--amber-text); }
-
-    .bar-wrap {
-      position: relative;
-      margin-top: 22px;
-      margin-bottom: 10px;
-    }
     .bar-track {
       width: 100%;
       height: 18px;
@@ -128,39 +121,45 @@
     }
     .bar-fill { display: flex; height: 100%; }
     .bar-segment { height: 100%; transition: width 0.35s ease; }
-    .seg-teoria   { background: var(--purple); }
-    .seg-pract    { background: var(--teal); }
-    .seg-extra    { background: var(--amber); }
+    .seg-teoria { background: var(--purple); }
+    .seg-pract  { background: var(--teal); }
+    .seg-extra  { background: var(--amber); }
 
-    .threshold {
+    /* Threshold markers BELOW the bar */
+    .bar-markers {
+      position: relative;
+      height: 28px;
+      margin-top: 0;
+    }
+    .marker {
       position: absolute;
-      top: -18px;
+      top: 0;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       pointer-events: none;
     }
-    .threshold-label {
+    .marker-line {
+      width: 1.5px;
+      height: 8px;
+    }
+    .marker-label {
       font-size: 10px;
       font-weight: 500;
       white-space: nowrap;
-      margin-bottom: 2px;
+      margin-top: 2px;
     }
-    .threshold-line {
-      width: 2px;
-      height: 18px;
-    }
-    .th-aprobado .threshold-label { color: var(--red-text); }
-    .th-aprobado .threshold-line  { background: var(--red); }
-    .th-examen   .threshold-label { color: var(--amber-text); }
-    .th-examen   .threshold-line  { background: var(--amber); opacity: 0.8; }
+    .mk-aprobado .marker-line  { background: var(--red); }
+    .mk-aprobado .marker-label { color: var(--red-text); }
+    .mk-examen   .marker-line  { background: var(--amber); }
+    .mk-examen   .marker-label { color: var(--amber-text); }
 
     .bar-legend {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .legend-item {
       display: flex;
@@ -169,13 +168,9 @@
       font-size: 12px;
       color: var(--text-muted);
     }
-    .legend-dot {
-      width: 10px; height: 10px;
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-    /* ── Alerts ── */
+    /* Alerts */
     .alert {
       border-radius: var(--radius-md);
       padding: 10px 14px;
@@ -184,39 +179,49 @@
       display: none;
       line-height: 1.5;
     }
-    .alert.show { display: block; }
+    .alert.show    { display: block; }
     .alert-blocked { background: var(--bg-warning); color: var(--amber-text); border: 0.5px solid var(--amber); }
     .alert-pass    { background: var(--bg-success); color: var(--teal-text);  border: 0.5px solid var(--teal); }
     .alert-fail    { background: var(--bg-danger);  color: var(--red-text);   border: 0.5px solid var(--red); }
 
-    /* ── Cards grid ── */
-    .sections {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 12px;
+    /* Layout */
+    .section-block {
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-lg);
       margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-surface);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .section-header-left { display: flex; align-items: baseline; gap: 10px; }
+    .section-title { font-size: 14px; font-weight: 600; }
+    .section-sub   { font-size: 12px; color: var(--text-muted); }
+    .section-pts   { font-size: 20px; font-weight: 600; }
+    .section-pts sub { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+
+    .section-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     }
 
     .card {
+      padding: 1rem 1.25rem;
       background: var(--bg);
-      border: 0.5px solid var(--border-md);
-      border-radius: var(--radius-lg);
-      padding: 1.1rem 1.25rem;
+    }
+    .card + .card {
+      border-left: 0.5px solid var(--border);
     }
 
-    .card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 14px;
-    }
-    .card-title { font-size: 14px; font-weight: 500; }
-    .card-sub   { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .card-pts   { font-size: 21px; font-weight: 600; text-align: right; white-space: nowrap; }
-    .card-pts sub { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+    .card-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text-muted); }
 
-    /* ── Form fields ── */
-    .field { margin-bottom: 12px; }
+    /* Form fields */
+    .field { margin-bottom: 11px; }
     .field:last-child { margin-bottom: 0; }
     .field label {
       display: block;
@@ -254,13 +259,13 @@
     }
     .q-grid input { text-align: center; }
 
-    .divider { height: 0.5px; background: var(--border); margin: 12px 0; }
+    .divider { height: 0.5px; background: var(--border); margin: 11px 0; }
 
-    /* ── Desglose ── */
+    /* Desglose */
     .desglose { font-size: 12px; color: var(--text-muted); line-height: 1.9; }
     .desglose strong { color: var(--text); font-weight: 500; }
 
-    /* ── Final row ── */
+    /* Final row */
     .final-row {
       display: flex;
       align-items: center;
@@ -272,10 +277,10 @@
     .final-label { font-size: 15px; color: var(--text-muted); }
     .final-score { font-size: 32px; font-weight: 600; }
 
-    /* ── Responsive ── */
     @media (max-width: 500px) {
       body { padding: 1rem 0.75rem; }
-      .sections { grid-template-columns: 1fr; }
+      .section-body { grid-template-columns: 1fr; }
+      .card + .card { border-left: none; border-top: 0.5px solid var(--border); }
     }
   </style>
 </head>
@@ -296,21 +301,21 @@
         <span class="badge badge-pending" id="badge-main">pendiente</span>
       </div>
     </div>
-    <div class="bar-wrap">
-      <div class="threshold th-aprobado" style="left:50%">
-        <span class="threshold-label">aprobado (5,0)</span>
-        <div class="threshold-line"></div>
+    <div class="bar-track">
+      <div class="bar-fill">
+        <div class="bar-segment seg-teoria" id="seg-teoria" style="width:0%"></div>
+        <div class="bar-segment seg-pract"  id="seg-pract"  style="width:0%"></div>
+        <div class="bar-segment seg-extra"  id="seg-extra"  style="width:0%"></div>
       </div>
-      <div class="threshold th-examen" style="left:40%">
-        <span class="threshold-label">umbral examen (4,0)</span>
-        <div class="threshold-line"></div>
+    </div>
+    <div class="bar-markers">
+      <div class="marker mk-examen" style="left:40%">
+        <div class="marker-line"></div>
+        <span class="marker-label">umbral examen (4,0)</span>
       </div>
-      <div class="bar-track">
-        <div class="bar-fill">
-          <div class="bar-segment seg-teoria" id="seg-teoria" style="width:0%"></div>
-          <div class="bar-segment seg-pract"  id="seg-pract"  style="width:0%"></div>
-          <div class="bar-segment seg-extra"  id="seg-extra"  style="width:0%"></div>
-        </div>
+      <div class="marker mk-aprobado" style="left:50%">
+        <div class="marker-line"></div>
+        <span class="marker-label">aprobado (5,0)</span>
       </div>
     </div>
     <div class="bar-legend">
@@ -331,114 +336,108 @@
     ✗ <span id="alert-fail-text">Todavía por debajo del aprobado.</span>
   </div>
 
-  <!-- Fila superior: examen + evaluación continua -->
-  <div class="sections">
-
-    <div class="card">
-      <div class="card-head">
-        <div>
-          <div class="card-title">Examen de junio</div>
-          <div class="card-sub">Condición necesaria: mínimo 4 / 10</div>
-        </div>
-        <div class="card-pts" id="pts-examen">—<sub> pts</sub></div>
+  <!-- BLOQUE TEORÍA (examen + EC agrupados) -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="section-title">Teoría</span>
+        <span class="section-sub">Examen de junio + evaluación continua — hasta 7 pts</span>
       </div>
-      <div class="field">
-        <label for="inp-examen">Nota del examen (0 – 10)</label>
-        <input type="number" id="inp-examen" min="0" max="10" step="0.1" placeholder="Introduce tu nota">
-        <p class="field-hint">Determina el peso de los puntos de teoría no cubiertos por la EC</p>
-      </div>
+      <span class="section-pts" id="pts-teoria">—<sub> / 7 pts</sub></span>
     </div>
+    <div class="section-body">
 
-    <div class="card">
-      <div class="card-head">
-        <div>
-          <div class="card-title">Evaluación continua</div>
-          <div class="card-sub">Hasta 3 pts de teoría</div>
+      <!-- Examen -->
+      <div class="card">
+        <div class="card-title">Examen de junio</div>
+        <div class="field">
+          <label for="inp-examen">Nota del examen (0 – 10) <span style="color:var(--red-text);font-weight:500">· mínimo 4</span></label>
+          <input type="number" id="inp-examen" min="0" max="10" step="0.1" placeholder="Introduce tu nota">
+          <p class="field-hint">Determina el peso de los puntos de teoría no cubiertos por la EC</p>
         </div>
-        <div class="card-pts" id="pts-ec">0,00<sub> pts</sub></div>
-      </div>
-
-      <div class="field">
-        <label>Cuestionarios por tema (0 – 10 cada uno) — hasta 2,4 pts</label>
-        <div class="q-grid">
-          <input type="number" id="q1" min="0" max="10" step="0.1" placeholder="T1">
-          <input type="number" id="q2" min="0" max="10" step="0.1" placeholder="T2">
-          <input type="number" id="q3" min="0" max="10" step="0.1" placeholder="T3">
-          <input type="number" id="q4" min="0" max="10" step="0.1" placeholder="T4">
-          <input type="number" id="q5" min="0" max="10" step="0.1" placeholder="T5">
-          <input type="number" id="q6" min="0" max="10" step="0.1" placeholder="T6">
+        <div class="divider"></div>
+        <div class="desglose">
+          <div>EC asegurada: <strong id="info-ec">0,00 pts</strong></div>
+          <div>Aportación del examen: <strong id="info-examen">—</strong></div>
+          <div style="border-top:0.5px solid var(--border);margin:6px 0;"></div>
+          <div>Total teoría: <strong id="info-teoria">—</strong> / 7 pts</div>
         </div>
-        <p class="field-hint">Media de los cuestionarios introducidos: <strong id="media-q">—</strong></p>
       </div>
 
-      <div class="divider"></div>
-
-      <div class="field">
-        <label for="inp-asistencia">Porcentaje de controles de asistencia superados</label>
-        <input type="number" id="inp-asistencia" min="0" max="100" step="1" placeholder="Ej: 75">
-        <p class="field-hint">0,6 × (% / 100) = hasta 0,6 pts</p>
+      <!-- Evaluación continua -->
+      <div class="card">
+        <div class="card-title">Evaluación continua <span style="color:var(--text-hint);font-weight:400">— hasta 3 pts asegurados</span></div>
+        <div class="field">
+          <label>Cuestionarios por tema (0 – 10 cada uno) — hasta 2,4 pts</label>
+          <div class="q-grid">
+            <input type="number" id="q1" min="0" max="10" step="0.1" placeholder="T1">
+            <input type="number" id="q2" min="0" max="10" step="0.1" placeholder="T2">
+            <input type="number" id="q3" min="0" max="10" step="0.1" placeholder="T3">
+            <input type="number" id="q4" min="0" max="10" step="0.1" placeholder="T4">
+            <input type="number" id="q5" min="0" max="10" step="0.1" placeholder="T5">
+            <input type="number" id="q6" min="0" max="10" step="0.1" placeholder="T6">
+          </div>
+          <p class="field-hint">Media introducida: <strong id="media-q">—</strong> → <strong id="pts-ec-q">0,00 pts</strong></p>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label for="inp-asistencia">Porcentaje de controles de asistencia superados — hasta 0,6 pts</label>
+          <input type="number" id="inp-asistencia" min="0" max="100" step="1" placeholder="Ej: 75">
+          <p class="field-hint">EC total asegurada: <strong id="pts-ec">0,00 pts</strong></p>
+        </div>
       </div>
+
     </div>
-
   </div>
 
-  <!-- Fila inferior: prácticas + bono -->
-  <div class="sections">
-
-    <div class="card">
-      <div class="card-head">
-        <div>
-          <div class="card-title">Prácticas</div>
-          <div class="card-sub">Hasta 3 pts — requiere examen ≥ 4</div>
-        </div>
-        <div class="card-pts" id="pts-pract">0,00<sub> pts</sub></div>
+  <!-- BLOQUE PRÁCTICAS -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="section-title">Prácticas</span>
+        <span class="section-sub">Actividades en grupo reducido — hasta 3 pts · requiere examen ≥ 4</span>
       </div>
-      <div class="field">
-        <label for="inp-a1">Actividad 1 — informe individual (0 – 0,7)</label>
-        <input type="number" id="inp-a1" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
-      </div>
-      <div class="field">
-        <label for="inp-a2">Actividad 2 — informe grupal (0 – 0,7)</label>
-        <input type="number" id="inp-a2" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
-      </div>
-      <div class="field">
-        <label for="inp-a3">Actividad 3 — examen presencial (0 – 0,7)</label>
-        <input type="number" id="inp-a3" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
-      </div>
-      <div class="field">
-        <label for="inp-a4">Actividad 4 — examen presencial (0 – 0,7)</label>
-        <input type="number" id="inp-a4" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
-      </div>
-      <div class="field">
-        <label for="inp-a5">Actividad 5 — asistencia y participación (0 – 0,2)</label>
-        <input type="number" id="inp-a5" min="0" max="0.2" step="0.01" placeholder="Nota sobre 0,2">
-      </div>
+      <span class="section-pts" id="pts-pract">0,00<sub> / 3 pts</sub></span>
     </div>
+    <div class="section-body">
 
-    <div class="card">
-      <div class="card-head">
-        <div>
-          <div class="card-title">Bono experimentos</div>
-          <div class="card-sub">Hasta 0,5 pts — solo si ya aprobado</div>
+      <div class="card">
+        <div class="field">
+          <label for="inp-a1">Actividad 1 — informe individual (0 – 0,7)</label>
+          <input type="number" id="inp-a1" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
         </div>
-        <div class="card-pts" id="pts-extra">0,00<sub> pts</sub></div>
-      </div>
-      <div class="field">
-        <label for="inp-exp">Experimentos completados (0 – 5)</label>
-        <input type="number" id="inp-exp" min="0" max="5" step="1" placeholder="Número de experimentos">
-        <p class="field-hint">0,1 pts por experimento. Solo opera una vez aprobada la asignatura.</p>
+        <div class="field">
+          <label for="inp-a2">Actividad 2 — informe grupal (0 – 0,7)</label>
+          <input type="number" id="inp-a2" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+        </div>
+        <div class="field">
+          <label for="inp-a3">Actividad 3 — examen presencial (0 – 0,7)</label>
+          <input type="number" id="inp-a3" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+        </div>
+        <div class="field">
+          <label for="inp-a4">Actividad 4 — examen presencial (0 – 0,7)</label>
+          <input type="number" id="inp-a4" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+        </div>
+        <div class="field">
+          <label for="inp-a5">Actividad 5 — asistencia y participación (0 – 0,2)</label>
+          <input type="number" id="inp-a5" min="0" max="0.2" step="0.01" placeholder="Nota sobre 0,2">
+        </div>
       </div>
 
-      <div class="divider"></div>
-
-      <div class="desglose">
-        <div>EC asegurada: <strong id="info-ec">0,00 pts</strong></div>
-        <div>Aportación del examen: <strong id="info-examen">—</strong></div>
-        <div style="border-top: 0.5px solid var(--border); margin: 6px 0;"></div>
-        <div>Total teoría: <strong id="info-teoria">—</strong> / 7 pts</div>
+      <!-- Bono experimentos dentro del bloque prácticas como columna derecha -->
+      <div class="card">
+        <div class="card-title">Bono experimentos <span style="color:var(--text-hint);font-weight:400">— hasta 0,5 pts · solo si aprobado</span></div>
+        <div class="field">
+          <label for="inp-exp">Experimentos completados (0 – 5)</label>
+          <input type="number" id="inp-exp" min="0" max="5" step="1" placeholder="Número de experimentos">
+          <p class="field-hint">0,1 pts por experimento. Solo opera una vez superado el 5 en la nota final.</p>
+        </div>
+        <div class="field">
+          <p class="field-hint">Bono aplicado: <strong id="pts-extra">0,00 pts</strong></p>
+        </div>
       </div>
+
     </div>
-
   </div>
 
   <!-- Nota final -->
@@ -474,13 +473,14 @@
     const ecA = asist  !== null ? clamp((asist/100)*0.6, 0, 0.6) : 0;
     const ec  = ecQ + ecA;
 
-    document.getElementById('pts-ec').innerHTML  = fmt(ec)  + '<sub> pts</sub>';
-    document.getElementById('info-ec').textContent = fmt(ec) + ' pts';
+    document.getElementById('pts-ec-q').textContent = fmt(ecQ) + ' pts';
+    document.getElementById('pts-ec').textContent   = fmt(ec)  + ' pts';
+    document.getElementById('info-ec').textContent  = fmt(ec)  + ' pts';
 
     const pract = clamp(prs.reduce((s,x) => s + (x !== null ? x : 0), 0), 0, 3);
-    document.getElementById('pts-pract').innerHTML = fmt(pract) + '<sub> pts</sub>';
+    document.getElementById('pts-pract').innerHTML = fmt(pract) + '<sub> / 3 pts</sub>';
 
-    const expN  = v('inp-exp');
+    const expN = v('inp-exp');
 
     let teoria = null, finalBase = null, finalTotal = null;
     let blocked = false;
@@ -489,28 +489,27 @@
       const ex = clamp(examen, 0, 10);
       if (ex < 4) {
         blocked = true;
-        document.getElementById('pts-examen').innerHTML = fmt(ex) + '<sub> pts</sub>';
         document.getElementById('info-examen').textContent = '—';
-        document.getElementById('info-teoria').textContent  = '—';
-        document.getElementById('pts-extra').innerHTML = '0,00<sub> pts</sub>';
+        document.getElementById('info-teoria').textContent = '—';
+        document.getElementById('pts-teoria').innerHTML    = '—<sub> / 7 pts</sub>';
+        document.getElementById('pts-extra').textContent   = '0,00 pts';
       } else {
         const aportExamen = (ex/10) * (7 - ec);
-        teoria     = ec + aportExamen;
-        finalBase  = teoria + pract;
+        teoria    = ec + aportExamen;
+        finalBase = teoria + pract;
         const expPts = expN !== null ? clamp(expN,0,5)*0.1 : 0;
         finalTotal = finalBase >= 5 ? Math.min(10, finalBase + expPts) : finalBase;
 
-        document.getElementById('pts-examen').innerHTML  = fmt(ex) + '<sub> pts</sub>';
         document.getElementById('info-examen').textContent = fmt(aportExamen) + ' pts';
         document.getElementById('info-teoria').textContent = fmt(teoria);
-        document.getElementById('pts-extra').innerHTML  =
-          (finalBase >= 5 ? fmt(expPts) : '0,00') + '<sub> pts</sub>';
+        document.getElementById('pts-teoria').innerHTML    = fmt(teoria) + '<sub> / 7 pts</sub>';
+        document.getElementById('pts-extra').textContent   = (finalBase >= 5 ? fmt(expPts) : '0,00') + ' pts';
       }
     } else {
-      document.getElementById('pts-examen').innerHTML  = '—<sub> pts</sub>';
       document.getElementById('info-examen').textContent = '—';
-      document.getElementById('info-teoria').textContent  = '—';
-      document.getElementById('pts-extra').innerHTML = '0,00<sub> pts</sub>';
+      document.getElementById('info-teoria').textContent = '—';
+      document.getElementById('pts-teoria').innerHTML    = '—<sub> / 7 pts</sub>';
+      document.getElementById('pts-extra').textContent   = '0,00 pts';
     }
 
     document.getElementById('alert-blocked').classList.toggle('show', blocked);
