@@ -216,6 +216,9 @@
     }
     input::placeholder { color: var(--text-hint); }
     .field-hint { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
+    input.input-error { border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(226,75,74,0.15) !important; }
+    .field-error { font-size: 11px; color: var(--red-text); margin-top: 4px; display: none; }
+    .field-error.show { display: block; }
 
     .q-grid {
       display: grid;
@@ -303,7 +306,7 @@
       </div>
       <div class="marker mk-aprobado" style="left:50%">
         <div class="marker-line"></div>
-        <span class="marker-label">aprob. (5,0)</span>
+        <span class="marker-label">aprobado (5,0)</span>
       </div>
     </div>
     <div class="bar-legend">
@@ -390,22 +393,27 @@
         <div class="field">
           <label for="inp-a1">Actividad 1 — informe individual (0 – 0,7)</label>
           <input type="number" id="inp-a1" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+          <p class="field-error" id="err-a1">Valor máximo: 0,7</p>
         </div>
         <div class="field">
           <label for="inp-a2">Actividad 2 — informe grupal (0 – 0,7)</label>
           <input type="number" id="inp-a2" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+          <p class="field-error" id="err-a2">Valor máximo: 0,7</p>
         </div>
         <div class="field">
           <label for="inp-a3">Actividad 3 — examen presencial (0 – 0,7)</label>
           <input type="number" id="inp-a3" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+          <p class="field-error" id="err-a3">Valor máximo: 0,7</p>
         </div>
         <div class="field">
           <label for="inp-a4">Actividad 4 — examen presencial (0 – 0,7)</label>
           <input type="number" id="inp-a4" min="0" max="0.7" step="0.01" placeholder="Nota sobre 0,7">
+          <p class="field-error" id="err-a4">Valor máximo: 0,7</p>
         </div>
         <div class="field">
           <label for="inp-a5">Actividad 5 — asistencia y participación (0 – 0,2)</label>
           <input type="number" id="inp-a5" min="0" max="0.2" step="0.01" placeholder="Nota sobre 0,2">
+          <p class="field-error" id="err-a5">Valor máximo: 0,2</p>
         </div>
       </div>
     </div>
@@ -451,6 +459,16 @@
     const examen = v('inp-examen');
     const qs = ['q1','q2','q3','q4','q5','q6'].map(id => v(id));
     const asist = v('inp-asistencia');
+    // Validación de límites en prácticas
+    const limites = { 'inp-a1': 0.7, 'inp-a2': 0.7, 'inp-a3': 0.7, 'inp-a4': 0.7, 'inp-a5': 0.2 };
+    Object.entries(limites).forEach(([id, max]) => {
+      const val = v(id);
+      const input = document.getElementById(id);
+      const err   = document.getElementById('err-' + id.replace('inp-', ''));
+      const over  = val !== null && val > max;
+      input.classList.toggle('input-error', over);
+      if (err) err.classList.toggle('show', over);
+    });
     const prs = ['inp-a1','inp-a2','inp-a3','inp-a4','inp-a5'].map(id => v(id));
 
     const anyQ = qs.some(x => x !== null);
