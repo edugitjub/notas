@@ -67,19 +67,20 @@
 
   /* ── RESUMEN VISUAL DE PESOS ── */
   .pesos-bar-wrap {
-    background: var(--negro);
+    background: var(--crema);
     padding: 1.3rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    border-bottom: 1px solid var(--gris-claro);
   }
   .pesos-bar {
     display: flex;
     width: 100%;
     max-width: 640px;
     height: 34px;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--gris-claro);
     overflow: hidden;
     font-size: 0.78rem;
     font-weight: 600;
@@ -92,15 +93,15 @@
     color: white;
     transition: width 0.4s;
   }
-  .seg-teoria    { background: var(--granate); width: 70%; }
-  .seg-practicas { background: #3a3a3a;        width: 30%; border-left: 1px solid rgba(255,255,255,0.15); }
+  .seg-teoria    { background: #a8425a; width: 70%; }
+  .seg-practicas { background: #5c5955; width: 30%; border-left: 1px solid var(--gris-claro); }
   .pesos-labels {
     display: flex;
     width: 100%;
     max-width: 640px;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #a8a5a0;
+    color: var(--gris-piedra);
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
@@ -214,6 +215,25 @@
     font-weight: 600;
     padding-top: 0.75rem;
   }
+  .comp-table .total-general td {
+    border-top: 2px solid var(--negro);
+    padding-top: 0.85rem;
+  }
+  .comp-table .total-general .total-celda {
+    text-align: right;
+    font-weight: 600;
+  }
+  .comp-table .total-general .total-etiqueta {
+    font-size: 0.92rem;
+    color: var(--negro);
+    margin-right: 0.6rem;
+  }
+  .comp-table .total-general .total-cifra {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--granate);
+    font-variant-numeric: tabular-nums;
+  }
   .badge {
     display: inline-block;
     font-size: 0.7rem;
@@ -251,23 +271,24 @@
 
   /* ── CALCULADORA ── */
   .calc-section {
-    background: var(--negro);
+    background: var(--gris-claro);
     overflow: hidden;
   }
   .calc-head {
     padding: 1.1rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid #d2cec7;
     border-left: 4px solid var(--granate);
+    background: var(--blanco);
   }
   .calc-head h2 {
     font-family: 'Source Serif 4', serif;
     font-size: 1.1rem;
-    color: white;
+    color: var(--negro);
     font-weight: 600;
   }
   .calc-head p {
     font-size: 0.8rem;
-    color: #a8a5a0;
+    color: var(--gris-piedra);
     margin-top: 0.2rem;
     font-family: 'IBM Plex Sans', sans-serif;
   }
@@ -275,14 +296,53 @@
     padding: 1.4rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.3rem;
+  }
+
+  /* Grupos temáticos (Teoría / Prácticas / Experimentos) */
+  .calc-group {
+    background: var(--blanco);
+    border: 1px solid #d2cec7;
+    border-top: 3px solid var(--granate);
+  }
+  .calc-group-head {
+    padding: 0.7rem 1.1rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--negro);
+    border-bottom: 1px solid var(--gris-claro);
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .calc-group-head .grupo-pts {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--granate);
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .calc-group-body {
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .calc-subgroup-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gris-piedra);
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-bottom: 0.55rem;
   }
 
   .input-group-label {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #d9a0ad;
+    color: var(--granate);
     margin-bottom: 0.6rem;
     font-weight: 600;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -295,31 +355,40 @@
   .input-item label {
     display: block;
     font-size: 0.79rem;
-    color: #a8a5a0;
-    margin-bottom: 0.3rem;
+    color: var(--gris-piedra);
+    margin-bottom: 0.35rem;
   }
-  .input-item input[type=range] {
+  .input-item input[type=text] {
     width: 100%;
-    accent-color: var(--granate);
-    cursor: pointer;
-  }
-  .input-item .val-display {
-    text-align: right;
-    font-size: 0.85rem;
+    box-sizing: border-box;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: white;
-    margin-top: 0.15rem;
+    color: var(--negro);
+    background: var(--crema);
+    border: 1px solid #d2cec7;
+    padding: 0.45rem 0.6rem;
+    text-align: right;
     font-variant-numeric: tabular-nums;
   }
+  .input-item input[type=text]:focus {
+    outline: none;
+    border-color: var(--granate);
+    background: var(--blanco);
+  }
+  .input-item input[type=text].input-error {
+    border-color: var(--granate);
+    background: var(--granate-l);
+  }
 
-  .calc-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); }
+  .calc-divider { border: none; border-top: 1px solid #d2cec7; }
 
   .resultado-wrap { display: flex; flex-direction: column; gap: 0.9rem; }
 
   /* Barra de nota — estilo "sello" rectangular */
   .nota-bar-outer {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
+    background: var(--blanco);
+    border: 1px solid #d2cec7;
     height: 44px;
     position: relative;
     overflow: hidden;
@@ -341,27 +410,27 @@
     position: absolute;
     top: 0; bottom: 0;
     width: 2px;
-    background: rgba(255,255,255,0.55);
+    background: #b5b0a8;
   }
   .nota-bar-outer .marker-label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.68rem;
-    color: rgba(255,255,255,0.75);
+    color: var(--gris-piedra);
     white-space: nowrap;
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
   .desglose { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .desglose-item {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--blanco);
+    border: 1px solid #d2cec7;
     padding: 0.75rem 1rem;
   }
-  .desglose-item .d-label { font-size: 0.74rem; color: #a8a5a0; }
-  .desglose-item .d-val { font-size: 1.2rem; font-weight: 700; color: white; margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
-  .desglose-item .d-max { font-size: 0.7rem; color: #6b6864; }
+  .desglose-item .d-label { font-size: 0.74rem; color: var(--gris-piedra); }
+  .desglose-item .d-val { font-size: 1.2rem; font-weight: 700; color: var(--negro); margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
+  .desglose-item .d-max { font-size: 0.7rem; color: var(--gris-piedra); }
 
   .veredicto {
     padding: 1rem 1.2rem;
@@ -384,12 +453,12 @@
   }
   .veredicto .v-text { line-height: 1.5; }
   .veredicto .v-text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; font-family: 'Source Serif 4', serif; }
-  .veredicto-suspenso-min { background: rgba(122,0,25,0.25);  border-color: var(--granate); color: #f3c4cc; }
-  .veredicto-suspenso-min .v-marcador { color: #f3c4cc; }
-  .veredicto-suspenso     { background: rgba(184,118,46,0.2); border-color: var(--ambar);   color: #f0d3ad; }
-  .veredicto-suspenso .v-marcador { color: #f0d3ad; }
-  .veredicto-aprobado     { background: rgba(45,106,79,0.22); border-color: var(--verde);   color: #b9ddc9; }
-  .veredicto-aprobado .v-marcador { color: #b9ddc9; }
+  .veredicto-suspenso-min { background: var(--granate-l); border-color: var(--granate); color: var(--granate-d); }
+  .veredicto-suspenso-min .v-marcador { color: var(--granate); }
+  .veredicto-suspenso     { background: var(--ambar-l);   border-color: var(--ambar);   color: #7a4d1c; }
+  .veredicto-suspenso .v-marcador { color: var(--ambar); }
+  .veredicto-aprobado     { background: var(--verde-l);   border-color: var(--verde);   color: #1d4534; }
+  .veredicto-aprobado .v-marcador { color: var(--verde); }
 
   /* ── FLOWCHART DECISIÓN ── */
   .flow { display: flex; flex-direction: column; align-items: center; gap: 0; font-size: 0.85rem; font-family: 'IBM Plex Sans', sans-serif; }
@@ -454,115 +523,7 @@
   <!-- ── REGLAS CLAVE ── -->
   <div class="card">
     <div class="card-head"><div class="marca"></div>
-      <h2>Reglas que condicionan todo</h2>
-    </div>
-    <div class="card-body">
-      <div class="alerta alerta-roja">
-        <span class="marcador">Mínimo</span>
-        <span><strong>Examen final:</strong> necesitas obtener al menos <strong>4 sobre 10</strong> en el examen final de teoría. Si no lo alcanzas, la asignatura queda suspensa y la nota del acta es directamente la nota del examen, sin sumar nada más.</span>
-      </div>
-      <div class="alerta alerta-ambar">
-        <span class="marcador">Acta</span>
-        <span><strong>No presentado:</strong> si no te presentas al examen final, apareces en el acta como «No presentado» aunque tengas nota en prácticas o evaluación continua.</span>
-      </div>
-      <div class="alerta alerta-verde">
-        <span class="marcador">Aprobado</span>
-        <span>La asignatura se supera cuando la suma de teoría y prácticas alcanza al menos <strong>5 puntos sobre 10</strong>.</span>
-      </div>
-      <div class="alerta alerta-neutra">
-        <span class="marcador">Extra</span>
-        <span><strong>Participación en experimentos:</strong> puedes sumar hasta 0,5 puntos a la nota final, 0,1 por experimento. Solo se suman si tu nota final es ≥ 5.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TEORÍA ── -->
-  <div class="card">
-    <div class="card-head"><div class="marca"></div>
-      <h2>Bloque de Teoría</h2>
-      <span class="pts">hasta 7 pts</span>
-    </div>
-    <div class="card-body">
-      <div class="formula-box">
-        <div style="font-size:0.82rem; color:var(--gris-piedra);">Nota de Teoría =</div>
-        <div class="formula">(Examen Final / 10) × (7 − EC) + EC</div>
-        <small>donde EC = puntos de evaluación continua (máx. 3) · Examen Final calificado sobre 10</small>
-      </div>
-      <table class="comp-table">
-        <thead>
-          <tr><th>Componente</th><th>Detalles</th><th class="pts-col">Máx.</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="3" style="padding-top:0.9rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Evaluación continua</td>
-          </tr>
-          <tr>
-            <td><strong>Cuestionarios por tema</strong></td>
-            <td>6 cuestionarios, uno por tema (Prado/SEB o papel). Solo Windows; sin Apple ni Android.</td>
-            <td class="pts-col">2,4 pts</td>
-          </tr>
-          <tr>
-            <td><strong>Control de asistencia</strong></td>
-            <td>Aleatorio. Fórmula: 0,6 × (asistencias / controles). Al menos 20 % de ausencias permitido sin efecto.</td>
-            <td class="pts-col">0,6 pts</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2">Total Evaluación Continua (EC)</td>
-            <td class="pts-col">3,0 pts</td>
-          </tr>
-          <tr>
-            <td colspan="3" style="padding-top:1.1rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Examen final</td>
-          </tr>
-          <tr>
-            <td><strong>Examen final de junio</strong></td>
-            <td>Opción múltiple + preguntas cortas. Calificado sobre 10. Su peso en la nota varía según lo acumulado en evaluación continua.</td>
-            <td class="pts-col">variable</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2">Tramo que reparte el examen</td>
-            <td class="pts-col">7 − EC</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2">Total Teoría</td>
-            <td class="pts-col">7,00</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ── PRÁCTICAS ── -->
-  <div class="card">
-    <div class="card-head"><div class="marca"></div>
-      <h2>Bloque de Prácticas</h2>
-      <span class="pts">hasta 3 pts</span>
-    </div>
-    <div class="card-body">
-      <div class="alerta alerta-neutra">
-        <span class="marcador">Condición</span>
-        <span>Estas actividades solo cuentan si obtienes <strong>≥ 4 sobre 10</strong> en el examen final de teoría.</span>
-      </div>
-      <table class="comp-table">
-        <thead>
-          <tr><th>Actividad</th><th>Evaluación</th><th class="pts-col">Pts</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Actividad 1</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
-          <tr><td><strong>Actividad 2</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
-          <tr><td><strong>Actividad 3</strong></td><td><span class="badge badge-informe">Informe grupal (3–4 estudiantes)</span></td><td class="pts-col">0,80</td></tr>
-          <tr><td><strong>Actividad 4</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
-          <tr><td><strong>Actividad 5</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
-          <tr><td><strong>Actividad 6</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,20</td></tr>
-          <tr class="total-row"><td colspan="2">Total Prácticas</td><td class="pts-col">3,00</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ── DIAGRAMA DE DECISIÓN ── -->
-  <div class="card">
-    <div class="card-head"><div class="marca"></div>
-      <h2>Árbol de decisión: ¿qué nota obtengo?</h2>
+      <h2>Reglas</h2>
     </div>
     <div class="card-body">
       <div class="flow">
@@ -601,6 +562,87 @@
     </div>
   </div>
 
+  <!-- ── TEORÍA ── -->
+  <div class="card">
+    <div class="card-head"><div class="marca"></div>
+      <h2>Teoría</h2>
+    </div>
+    <div class="card-body">
+      <div class="formula-box">
+        <div style="font-size:0.82rem; color:var(--gris-piedra);">Nota de Teoría =</div>
+        <div class="formula">(Examen Final / 10) × (7 − EC) + EC</div>
+        <small>donde EC = puntos de evaluación continua (máx. 3) · Examen Final calificado sobre 10</small>
+      </div>
+      <table class="comp-table">
+        <thead>
+          <tr><th>Componente</th><th>Detalles</th><th class="pts-col">Máx.</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" style="padding-top:0.9rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Evaluación continua</td>
+          </tr>
+          <tr>
+            <td><strong>Cuestionarios por tema</strong></td>
+            <td>5 cuestionarios, uno por tema (Prado/SEB o papel). Solo Windows; sin Apple ni Android.</td>
+            <td class="pts-col">2,4 pts</td>
+          </tr>
+          <tr>
+            <td><strong>Control de asistencia</strong></td>
+            <td>Aleatorio. Fórmula: 0,6 × (asistencias / controles). Al menos 20 % de ausencias permitido sin efecto.</td>
+            <td class="pts-col">0,6 pts</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Total Evaluación Continua (EC)</td>
+            <td class="pts-col">3,0 pts</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="padding-top:1.1rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Examen final</td>
+          </tr>
+          <tr>
+            <td><strong>Examen final de junio</strong></td>
+            <td>Opción múltiple + preguntas cortas. Calificado sobre 10. Su peso en la nota varía según lo acumulado en evaluación continua.</td>
+            <td class="pts-col">variable</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Puntuación en juego en el examen</td>
+            <td class="pts-col">7 − EC</td>
+          </tr>
+          <tr class="total-general">
+            <td></td>
+            <td class="total-celda" colspan="2"><span class="total-etiqueta">Total Teoría</span><span class="total-cifra">7,00</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── PRÁCTICAS ── -->
+  <div class="card">
+    <div class="card-head"><div class="marca"></div>
+      <h2>Prácticas</h2>
+    </div>
+    <div class="card-body">
+      <div class="alerta alerta-neutra">
+        <span class="marcador">Condición</span>
+        <span>Estas actividades solo cuentan si obtienes <strong>≥ 4 sobre 10</strong> en el examen final de teoría.</span>
+      </div>
+      <table class="comp-table">
+        <thead>
+          <tr><th>Actividad</th><th>Evaluación</th><th class="pts-col">Pts</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Actividad 1</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
+          <tr><td><strong>Actividad 2</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
+          <tr><td><strong>Actividad 3</strong></td><td><span class="badge badge-informe">Informe grupal (3–4 estudiantes)</span></td><td class="pts-col">0,80</td></tr>
+          <tr><td><strong>Actividad 4</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
+          <tr><td><strong>Actividad 5</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
+          <tr><td><strong>Actividad 6</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,20</td></tr>
+          <tr class="total-general"><td></td><td class="total-celda" colspan="2"><span class="total-etiqueta">Total Prácticas</span><span class="total-cifra">3,00</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- ── CALCULADORA ── -->
   <div class="calc-section">
     <div class="calc-head">
@@ -609,81 +651,94 @@
     </div>
     <div class="calc-body">
 
-      <div>
-        <div class="input-group-label">Examen final de teoría (sobre 10)</div>
-        <div class="input-grid" style="grid-template-columns: 1fr;">
-          <div class="input-item">
-            <label>Nota del examen</label>
-            <input type="range" id="r_examen" min="0" max="10" step="0.1" value="6">
-            <div class="val-display" id="d_examen">6.0</div>
+      <!-- ── GRUPO TEORÍA ── -->
+      <div class="calc-group">
+        <div class="calc-group-head">Teoría <span class="grupo-pts">hasta 7 pts</span></div>
+        <div class="calc-group-body">
+
+          <div>
+            <div class="calc-subgroup-label">Evaluación continua</div>
+
+            <div style="margin-bottom:0.9rem;">
+              <label style="display:block; font-size:0.79rem; color:var(--gris-piedra); margin-bottom:0.5rem;">
+                Cuestionarios (nota sobre 10 cada uno · 0,48 pts máx. c/u)
+              </label>
+              <div class="input-grid">
+                <div class="input-item">
+                  <label>Cuestionario 1</label>
+                  <input type="text" inputmode="decimal" id="r_c1" data-min="0" data-max="10" value="6">
+                </div>
+                <div class="input-item">
+                  <label>Cuestionario 2</label>
+                  <input type="text" inputmode="decimal" id="r_c2" data-min="0" data-max="10" value="6">
+                </div>
+                <div class="input-item">
+                  <label>Cuestionario 3</label>
+                  <input type="text" inputmode="decimal" id="r_c3" data-min="0" data-max="10" value="6">
+                </div>
+                <div class="input-item">
+                  <label>Cuestionario 4</label>
+                  <input type="text" inputmode="decimal" id="r_c4" data-min="0" data-max="10" value="6">
+                </div>
+                <div class="input-item">
+                  <label>Cuestionario 5</label>
+                  <input type="text" inputmode="decimal" id="r_c5" data-min="0" data-max="10" value="6">
+                </div>
+              </div>
+              <div style="text-align:right; font-size:0.8rem; color:var(--negro); margin-top:0.5rem;">
+                Puntos por cuestionarios: <strong id="d_cues_total">1.44</strong> / 2,4 pts
+              </div>
+            </div>
+
+            <div class="input-grid">
+              <div class="input-item">
+                <label>Asistencia (0 a 0,6 pts)</label>
+                <input type="text" inputmode="decimal" id="r_asis" data-min="0" data-max="0.6" value="0.4">
+              </div>
+            </div>
           </div>
+
+          <hr class="calc-divider">
+
+          <div>
+            <div class="calc-subgroup-label">Examen final (sobre 10)</div>
+            <div class="input-grid" style="grid-template-columns: 1fr;">
+              <div class="input-item">
+                <label>Nota del examen</label>
+                <input type="text" inputmode="decimal" id="r_examen" data-min="0" data-max="10" value="6">
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <hr class="calc-divider">
-
-      <div>
-        <div class="input-group-label">Evaluación continua (teoría)</div>
-        <div class="input-grid">
-          <div class="input-item">
-            <label>Cuestionarios (máx. 2,4 pts)</label>
-            <input type="range" id="r_cues" min="0" max="2.4" step="0.05" value="1.5">
-            <div class="val-display" id="d_cues">1.50</div>
+      <!-- ── GRUPO PRÁCTICAS ── -->
+      <div class="calc-group">
+        <div class="calc-group-head">Prácticas <span class="grupo-pts">hasta 3 pts</span></div>
+        <div class="calc-group-body">
+          <div class="input-grid">
+            <div class="input-item">
+              <label>Act. 1 + 2 (0 a 0,2 pts)</label>
+              <input type="text" inputmode="decimal" id="r_p12" data-min="0" data-max="0.2" value="0.2">
+            </div>
+            <div class="input-item">
+              <label>Act. 3 – Informe (0 a 0,8 pts)</label>
+              <input type="text" inputmode="decimal" id="r_p3" data-min="0" data-max="0.8" value="0.6">
+            </div>
+            <div class="input-item">
+              <label>Act. 4 – Examen (0 a 0,9 pts)</label>
+              <input type="text" inputmode="decimal" id="r_p4" data-min="0" data-max="0.9" value="0.7">
+            </div>
+            <div class="input-item">
+              <label>Act. 5 – Examen (0 a 0,9 pts)</label>
+              <input type="text" inputmode="decimal" id="r_p5" data-min="0" data-max="0.9" value="0.7">
+            </div>
+            <div class="input-item">
+              <label>Act. 6 (0 a 0,2 pts)</label>
+              <input type="text" inputmode="decimal" id="r_p6" data-min="0" data-max="0.2" value="0.2">
+            </div>
           </div>
-          <div class="input-item">
-            <label>Asistencia (máx. 0,6 pts)</label>
-            <input type="range" id="r_asis" min="0" max="0.6" step="0.01" value="0.4">
-            <div class="val-display" id="d_asis">0.40</div>
-          </div>
-        </div>
-      </div>
-
-      <hr class="calc-divider">
-
-      <div>
-        <div class="input-group-label">Prácticas</div>
-        <div class="input-grid">
-          <div class="input-item">
-            <label>Act. 1 + 2 (máx. 0,2 pts)</label>
-            <input type="range" id="r_p12" min="0" max="0.2" step="0.05" value="0.2">
-            <div class="val-display" id="d_p12">0.20</div>
-          </div>
-          <div class="input-item">
-            <label>Act. 3 – Informe (máx. 0,8 pts)</label>
-            <input type="range" id="r_p3" min="0" max="0.8" step="0.05" value="0.6">
-            <div class="val-display" id="d_p3">0.60</div>
-          </div>
-          <div class="input-item">
-            <label>Act. 4 – Examen (máx. 0,9 pts)</label>
-            <input type="range" id="r_p4" min="0" max="0.9" step="0.05" value="0.7">
-            <div class="val-display" id="d_p4">0.70</div>
-          </div>
-          <div class="input-item">
-            <label>Act. 5 – Examen (máx. 0,9 pts)</label>
-            <input type="range" id="r_p5" min="0" max="0.9" step="0.05" value="0.7">
-            <div class="val-display" id="d_p5">0.70</div>
-          </div>
-          <div class="input-item">
-            <label>Act. 6 (máx. 0,2 pts)</label>
-            <input type="range" id="r_p6" min="0" max="0.2" step="0.05" value="0.2">
-            <div class="val-display" id="d_p6">0.20</div>
-          </div>
-        </div>
-      </div>
-
-      <hr class="calc-divider">
-
-      <div>
-        <div class="input-group-label">Participación en experimentos</div>
-        <div class="input-grid" style="grid-template-columns: 1fr;">
-          <div class="input-item">
-            <label>Experimentos realizados (0,1 pts c/u, máx. 0,5 pts)</label>
-            <input type="range" id="r_exp" min="0" max="0.5" step="0.1" value="0">
-            <div class="val-display" id="d_exp">0.00</div>
-          </div>
-        </div>
-        <div style="font-size:0.78rem; color:#a8a5a0; margin-top:0.5rem;">
-          Solo se suman si tu nota final (sin experimentos) es ≥ 5.
         </div>
       </div>
 
@@ -729,6 +784,24 @@
         </div>
       </div>
 
+      <hr class="calc-divider">
+
+      <!-- ── GRUPO EXPERIMENTOS ── -->
+      <div class="calc-group">
+        <div class="calc-group-head">Participación en experimentos <span class="grupo-pts">hasta 0,5 pts</span></div>
+        <div class="calc-group-body">
+          <div class="input-grid" style="grid-template-columns: 1fr;">
+            <div class="input-item">
+              <label>Experimentos realizados (0,1 pts c/u, 0 a 0,5 pts)</label>
+              <input type="text" inputmode="decimal" id="r_exp" data-min="0" data-max="0.5" value="0">
+            </div>
+          </div>
+          <div style="font-size:0.78rem; color:var(--gris-piedra); margin-top:0.5rem;">
+            Solo se suman si tu nota final (sin experimentos) es ≥ 5.
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -739,35 +812,64 @@
 </footer>
 
 <script>
-const ids = ['r_examen','r_cues','r_asis','r_p12','r_p3','r_p4','r_p5','r_p6','r_exp'];
+const ids = ['r_examen','r_c1','r_c2','r_c3','r_c4','r_c5','r_asis','r_p12','r_p3','r_p4','r_p5','r_p6','r_exp'];
 
 function fmt(v, dec=2){ return parseFloat(v).toFixed(dec); }
 
-function update(){
-  const examen = parseFloat(document.getElementById('r_examen').value);
-  const cues   = parseFloat(document.getElementById('r_cues').value);
-  const asis   = parseFloat(document.getElementById('r_asis').value);
-  const p12    = parseFloat(document.getElementById('r_p12').value);
-  const p3     = parseFloat(document.getElementById('r_p3').value);
-  const p4     = parseFloat(document.getElementById('r_p4').value);
-  const p5     = parseFloat(document.getElementById('r_p5').value);
-  const p6     = parseFloat(document.getElementById('r_p6').value);
-  const exp    = parseFloat(document.getElementById('r_exp').value);
+// Convierte texto con , o . en número. Devuelve NaN si no es válido.
+function parseInputValue(str){
+  if(str === null || str === undefined) return NaN;
+  const norm = String(str).trim().replace(',', '.');
+  if(norm === '') return NaN;
+  const n = parseFloat(norm);
+  return isNaN(n) ? NaN : n;
+}
 
-  document.getElementById('d_examen').textContent = fmt(examen,1);
-  document.getElementById('d_cues').textContent   = fmt(cues);
-  document.getElementById('d_asis').textContent   = fmt(asis);
-  document.getElementById('d_p12').textContent    = fmt(p12);
-  document.getElementById('d_p3').textContent     = fmt(p3);
-  document.getElementById('d_p4').textContent     = fmt(p4);
-  document.getElementById('d_p5').textContent     = fmt(p5);
-  document.getElementById('d_p6').textContent     = fmt(p6);
-  document.getElementById('d_exp').textContent    = fmt(exp);
+// Lee un input, valida contra su rango [data-min, data-max], y devuelve el valor clamped.
+// Si el valor no es válido o está fuera de rango, marca visualmente el campo.
+function readInput(id){
+  const el  = document.getElementById(id);
+  const min = parseFloat(el.dataset.min);
+  const max = parseFloat(el.dataset.max);
+  let v = parseInputValue(el.value);
+
+  if(isNaN(v)){
+    el.classList.add('input-error');
+    return min;
+  }
+  if(v < min || v > max){
+    el.classList.add('input-error');
+    v = Math.min(Math.max(v, min), max);
+  } else {
+    el.classList.remove('input-error');
+  }
+  return v;
+}
+
+function update(){
+  const examen = readInput('r_examen');
+  const c1     = readInput('r_c1');
+  const c2     = readInput('r_c2');
+  const c3     = readInput('r_c3');
+  const c4     = readInput('r_c4');
+  const c5     = readInput('r_c5');
+  const asis   = readInput('r_asis');
+  const p12    = readInput('r_p12');
+  const p3     = readInput('r_p3');
+  const p4     = readInput('r_p4');
+  const p5     = readInput('r_p5');
+  const p6     = readInput('r_p6');
+  const exp    = readInput('r_exp');
+
+  // Cada cuestionario aporta (nota/10) × 0,48 pts, máximo 2,4 pts en total
+  const cues = (c1 + c2 + c3 + c4 + c5) / 10 * 0.48;
+  document.getElementById('d_cues_total').textContent = fmt(cues);
 
   const ec        = Math.min(cues + asis, 3);
   const pesoExamen= 7 - ec;
   const notaTeo   = examen * pesoExamen / 10 + ec;
   const notaPrac  = p12 + p3 + p4 + p5 + p6;
+
 
   const elTeo  = document.getElementById('res_teoria');
   const elPrac = document.getElementById('res_prac');
