@@ -647,7 +647,6 @@
   <div class="calc-section">
     <div class="calc-head">
       <h2>Calculadora de nota</h2>
-      <p>Mueve los controles para simular distintos escenarios</p>
     </div>
     <div class="calc-body">
 
@@ -745,7 +744,7 @@
       <hr class="calc-divider">
 
       <div class="resultado-wrap">
-        <div class="input-group-label">Resultado</div>
+        <div class="input-group-label" style="text-align:center; font-size:1.05rem;">Calificación final de la asignatura</div>
 
         <div class="desglose">
           <div class="desglose-item">
@@ -880,6 +879,8 @@ function update(){
   const vMarc  = document.getElementById('v_marcador');
   const vTitle = document.getElementById('v_title');
   const vDesc  = document.getElementById('v_desc');
+  const m4     = document.getElementById('m4');
+  const m4l    = document.getElementById('m4l');
 
   if(examen < 4){
     elTeo.textContent  = '—';
@@ -891,6 +892,11 @@ function update(){
     barFill.style.width      = pct + '%';
     barFill.style.background = '#7a0019';
     barFill.textContent      = fmt(examen,1) + ' / 10';
+
+    // El marcador del 4 solo aporta información si la barra no lo ha cubierto ya
+    const ocultar4 = pct >= 40;
+    m4.style.display  = ocultar4 ? 'none' : 'block';
+    m4l.style.display = ocultar4 ? 'none' : 'block';
 
     verd.className = 'veredicto veredicto-suspenso-min';
     vMarc.textContent  = 'Suspenso';
@@ -910,6 +916,11 @@ function update(){
 
     const pct = Math.min(total/10*100, 100);
     barFill.style.width = pct + '%';
+
+    // El marcador del 4 solo aporta información si la barra no lo ha cubierto ya
+    const ocultar4 = pct >= 40;
+    m4.style.display  = ocultar4 ? 'none' : 'block';
+    m4l.style.display = ocultar4 ? 'none' : 'block';
 
     if(aprobado){
       barFill.style.background = '#2d6a4f';
