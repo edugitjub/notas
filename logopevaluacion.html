@@ -3,61 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habilidades Cognitivas, sistema de evaluación. Prof. E. Madrid</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Habilidades Cognitivas, evaluación 2027. Prof. E. Madrid</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --azul:    #1a2e4a;
-    --azul-m:  #2a4a72;
-    --azul-l:  #dce8f5;
-    --naranja: #e07b39;
-    --verde:   #4caf82;
-    --rojo:    #d94f3d;
-    --crema:   #f8f7f4;
-    --gris:    #6b7280;
-    --gris-l:  #e5e7eb;
-    --texto:   #1f2937;
+    --granate:    #7a0019;
+    --granate-d:  #5c0013;
+    --granate-l:  #fbe9ec;
+    --negro:      #1c1c1c;
+    --gris-piedra:#9b9893;
+    --gris-claro: #e7e4df;
+    --crema:      #f7f6f4;
+    --blanco:     #ffffff;
+    --verde:      #2d6a4f;
+    --verde-l:    #e6f1ec;
+    --ambar:      #b8762e;
+    --ambar-l:    #faf0e3;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     background: var(--crema);
-    color: var(--texto);
+    color: var(--negro);
     line-height: 1.6;
   }
 
   /* ── CABECERA ── */
   header {
-    background: var(--azul);
-    color: white;
-    padding: 2.5rem 2rem 2rem;
+    background: var(--blanco);
+    color: var(--negro);
+    padding: 2.8rem 2rem 2.2rem;
     text-align: center;
+    border-bottom: 1px solid var(--gris-claro);
   }
-  header .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+  header .sello {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--naranja);
-    margin-bottom: 0.5rem;
+    color: var(--gris-piedra);
+    margin-bottom: 0.9rem;
   }
   header h1 {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--negro);
   }
-  header p {
-    margin-top: 0.6rem;
-    color: #94aec8;
+  header .rule {
+    width: 64px;
+    height: 3px;
+    background: var(--granate);
+    margin: 1rem auto 0.9rem;
+  }
+  header p.sub {
+    color: var(--gris-piedra);
     font-size: 0.9rem;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   /* ── RESUMEN VISUAL DE PESOS ── */
   .pesos-bar-wrap {
-    background: var(--azul-m);
-    padding: 1.4rem 2rem;
+    background: var(--negro);
+    padding: 1.3rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,11 +78,12 @@
     display: flex;
     width: 100%;
     max-width: 640px;
-    height: 36px;
-    border-radius: 6px;
+    height: 34px;
+    border: 1px solid rgba(255,255,255,0.15);
     overflow: hidden;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
   .pesos-bar .seg {
     display: flex;
@@ -80,15 +92,16 @@
     color: white;
     transition: width 0.4s;
   }
-  .seg-teoria   { background: var(--naranja); width: 70%; }
-  .seg-practicas{ background: var(--verde);   width: 30%; }
+  .seg-teoria    { background: var(--granate); width: 70%; }
+  .seg-practicas { background: #3a3a3a;        width: 30%; border-left: 1px solid rgba(255,255,255,0.15); }
   .pesos-labels {
     display: flex;
     width: 100%;
     max-width: 640px;
     justify-content: space-between;
-    font-size: 0.78rem;
-    color: #94aec8;
+    font-size: 0.75rem;
+    color: #a8a5a0;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   /* ── CONTENIDO PRINCIPAL ── */
@@ -98,50 +111,45 @@
     padding: 2rem 1.2rem 4rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.6rem;
   }
 
   /* ── TARJETAS ── */
   .card {
-    background: white;
-    border-radius: 10px;
-    border: 1px solid var(--gris-l);
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
   .card-head {
-    padding: 1rem 1.4rem 0.8rem;
-    border-bottom: 1px solid var(--gris-l);
+    padding: 1rem 1.4rem 0.85rem;
+    border-bottom: 1px solid var(--gris-claro);
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
-  .card-head .icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
+  .card-head .marca {
+    width: 4px;
+    align-self: stretch;
+    background: var(--granate);
     flex-shrink: 0;
+    margin: -1rem 0 -0.85rem -1.4rem;
   }
-  .icon-naranja { background: #fef0e7; }
-  .icon-verde   { background: #e6f7ef; }
-  .icon-azul    { background: var(--azul-l); }
-  .icon-rojo    { background: #fdecea; }
   .card-head h2 {
-    font-family: 'Lora', serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 1.05rem;
     font-weight: 600;
-    color: var(--azul);
+    color: var(--negro);
   }
   .card-head .pts {
     margin-left: auto;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.2rem 0.65rem;
-    border-radius: 20px;
-    background: var(--azul-l);
-    color: var(--azul);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border: 2px solid var(--granate);
+    background: var(--granate-l);
+    color: var(--granate);
     white-space: nowrap;
+    font-family: 'Source Serif 4', serif;
   }
   .card-body {
     padding: 1.2rem 1.4rem;
@@ -152,106 +160,116 @@
 
   /* ── ALERTAS ── */
   .alerta {
-    border-radius: 8px;
     padding: 0.9rem 1.1rem;
-    font-size: 0.88rem;
+    font-size: 0.87rem;
     line-height: 1.55;
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
+    border-left: 3px solid;
   }
-  .alerta-roja    { background: #fdecea; border-left: 4px solid var(--rojo); }
-  .alerta-naranja { background: #fef5ee; border-left: 4px solid var(--naranja); }
-  .alerta-verde   { background: #e6f7ef; border-left: 4px solid var(--verde); }
-  .alerta-azul    { background: var(--azul-l); border-left: 4px solid var(--azul-m); }
-  .alerta .alerta-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-  .alerta strong { color: var(--azul); }
+  .alerta-roja    { background: var(--granate-l); border-color: var(--granate); }
+  .alerta-ambar   { background: var(--ambar-l);   border-color: var(--ambar); }
+  .alerta-verde   { background: var(--verde-l);   border-color: var(--verde); }
+  .alerta-neutra  { background: var(--crema);     border-color: var(--gris-piedra); }
+  .alerta .marcador { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; min-width: 64px; }
+  .alerta-roja .marcador  { color: var(--granate); }
+  .alerta-ambar .marcador { color: var(--ambar); }
+  .alerta-verde .marcador { color: var(--verde); }
+  .alerta-neutra .marcador{ color: var(--gris-piedra); }
+  .alerta strong { color: var(--negro); }
 
   /* ── TABLA DE COMPONENTES ── */
   .comp-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.88rem;
+    font-size: 0.87rem;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
   .comp-table th {
     text-align: left;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--gris);
+    color: var(--gris-piedra);
     padding: 0 0.5rem 0.5rem;
-    border-bottom: 1px solid var(--gris-l);
+    border-bottom: 2px solid var(--negro);
+    font-weight: 600;
   }
   .comp-table td {
     padding: 0.6rem 0.5rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--gris-claro);
     vertical-align: middle;
   }
   .comp-table tr:last-child td { border-bottom: none; }
   .comp-table .pts-col {
     text-align: right;
     font-weight: 600;
-    color: var(--azul);
+    color: var(--granate);
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
   .comp-table .total-row td {
-    border-top: 2px solid var(--azul-l);
+    border-top: 2px solid var(--negro);
     font-weight: 600;
     padding-top: 0.75rem;
   }
   .badge {
     display: inline-block;
-    font-size: 0.72rem;
-    padding: 0.15rem 0.5rem;
-    border-radius: 12px;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid;
     font-weight: 500;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
-  .badge-participacion { background: #e6f7ef; color: #1a6b46; }
-  .badge-informe       { background: #fef5ee; color: #b55c1a; }
-  .badge-examen        { background: #fdecea; color: #a83228; }
+  .badge-participacion { border-color: var(--verde); color: var(--verde); }
+  .badge-informe       { border-color: var(--ambar); color: var(--ambar); }
+  .badge-examen        { border-color: var(--granate); color: var(--granate); }
 
   /* ── FÓRMULA TEORÍA ── */
   .formula-box {
-    background: var(--azul-l);
-    border-radius: 8px;
+    background: var(--crema);
+    border: 1px solid var(--gris-claro);
     padding: 1rem 1.2rem;
     font-size: 0.9rem;
     text-align: center;
   }
   .formula-box .formula {
-    font-family: 'Lora', serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 1.05rem;
-    color: var(--azul);
+    color: var(--negro);
     margin-top: 0.3rem;
     font-weight: 600;
   }
   .formula-box small {
     display: block;
-    color: var(--gris);
-    font-size: 0.78rem;
-    margin-top: 0.35rem;
+    color: var(--gris-piedra);
+    font-size: 0.76rem;
+    margin-top: 0.4rem;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   /* ── CALCULADORA ── */
   .calc-section {
-    background: var(--azul);
-    border-radius: 10px;
+    background: var(--negro);
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(26,46,74,0.18);
   }
   .calc-head {
     padding: 1.1rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    border-left: 4px solid var(--granate);
   }
   .calc-head h2 {
-    font-family: 'Lora', serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 1.1rem;
     color: white;
+    font-weight: 600;
   }
   .calc-head p {
-    font-size: 0.82rem;
-    color: #94aec8;
+    font-size: 0.8rem;
+    color: #a8a5a0;
     margin-top: 0.2rem;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
   .calc-body {
     padding: 1.4rem;
@@ -260,14 +278,14 @@
     gap: 1.2rem;
   }
 
-  /* Grupos de inputs */
   .input-group-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--naranja);
+    color: #d9a0ad;
     margin-bottom: 0.6rem;
     font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
   .input-grid {
     display: grid;
@@ -276,13 +294,13 @@
   }
   .input-item label {
     display: block;
-    font-size: 0.8rem;
-    color: #94aec8;
+    font-size: 0.79rem;
+    color: #a8a5a0;
     margin-bottom: 0.3rem;
   }
   .input-item input[type=range] {
     width: 100%;
-    accent-color: var(--naranja);
+    accent-color: var(--granate);
     cursor: pointer;
   }
   .input-item .val-display {
@@ -291,32 +309,23 @@
     font-weight: 600;
     color: white;
     margin-top: 0.15rem;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Separador */
-  .calc-divider {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
+  .calc-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); }
 
-  /* Resultado */
-  .resultado-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-  }
+  .resultado-wrap { display: flex; flex-direction: column; gap: 0.9rem; }
 
-  /* Barra de nota */
+  /* Barra de nota — estilo "sello" rectangular */
   .nota-bar-outer {
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
     height: 44px;
     position: relative;
     overflow: hidden;
   }
   .nota-bar-fill {
     height: 100%;
-    border-radius: 8px;
     transition: width 0.35s ease, background 0.35s ease;
     display: flex;
     align-items: center;
@@ -326,123 +335,95 @@
     color: white;
     min-width: 2.5rem;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
-  /* Marcadores en la barra */
   .nota-bar-outer .marker {
     position: absolute;
     top: 0; bottom: 0;
     width: 2px;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.55);
   }
   .nota-bar-outer .marker-label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.7);
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.75);
     white-space: nowrap;
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  /* Desglose de componentes */
-  .desglose {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-  }
+  .desglose { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .desglose-item {
-    background: rgba(255,255,255,0.07);
-    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
     padding: 0.75rem 1rem;
   }
-  .desglose-item .d-label {
-    font-size: 0.75rem;
-    color: #94aec8;
-  }
-  .desglose-item .d-val {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-    margin-top: 0.1rem;
-  }
-  .desglose-item .d-max {
-    font-size: 0.72rem;
-    color: #6b8db5;
-  }
+  .desglose-item .d-label { font-size: 0.74rem; color: #a8a5a0; }
+  .desglose-item .d-val { font-size: 1.2rem; font-weight: 700; color: white; margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
+  .desglose-item .d-max { font-size: 0.7rem; color: #6b6864; }
 
-  /* Veredicto */
   .veredicto {
-    border-radius: 8px;
     padding: 1rem 1.2rem;
-    font-size: 0.9rem;
+    font-size: 0.89rem;
     font-weight: 500;
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     transition: background 0.3s, border-color 0.3s;
-    border-left: 4px solid transparent;
+    border-left: 3px solid transparent;
   }
-  .veredicto .v-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .veredicto .v-marcador {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 3px;
+    min-width: 76px;
+  }
   .veredicto .v-text { line-height: 1.5; }
-  .veredicto .v-text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
-  .veredicto-suspenso-min  { background: rgba(217,79,61,0.15);  border-color: var(--rojo);    color: #fececa; }
-  .veredicto-suspenso      { background: rgba(224,123,57,0.15); border-color: var(--naranja); color: #fde8d5; }
-  .veredicto-aprobado      { background: rgba(76,175,130,0.15); border-color: var(--verde);   color: #c6f0de; }
+  .veredicto .v-text strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; font-family: 'Source Serif 4', serif; }
+  .veredicto-suspenso-min { background: rgba(122,0,25,0.25);  border-color: var(--granate); color: #f3c4cc; }
+  .veredicto-suspenso-min .v-marcador { color: #f3c4cc; }
+  .veredicto-suspenso     { background: rgba(184,118,46,0.2); border-color: var(--ambar);   color: #f0d3ad; }
+  .veredicto-suspenso .v-marcador { color: #f0d3ad; }
+  .veredicto-aprobado     { background: rgba(45,106,79,0.22); border-color: var(--verde);   color: #b9ddc9; }
+  .veredicto-aprobado .v-marcador { color: #b9ddc9; }
 
   /* ── FLOWCHART DECISIÓN ── */
-  .flow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    font-size: 0.85rem;
-  }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; font-size: 0.85rem; font-family: 'IBM Plex Sans', sans-serif; }
   .flow-node {
     padding: 0.65rem 1.2rem;
-    border-radius: 8px;
     text-align: center;
     max-width: 340px;
     width: 100%;
     font-weight: 500;
     line-height: 1.4;
+    border: 2px solid;
   }
-  .flow-diamond {
-    background: var(--azul-l);
-    color: var(--azul);
-    border: 2px solid var(--azul-m);
-    border-radius: 8px;
-  }
-  .flow-end-rojo   { background: #fdecea; color: var(--rojo);    border: 2px solid var(--rojo); }
-  .flow-end-verde  { background: #e6f7ef; color: #1a6b46;        border: 2px solid var(--verde); }
-  .flow-end-naranja{ background: #fef5ee; color: #b55c1a;        border: 2px solid var(--naranja); }
+  .flow-diamond     { background: var(--crema); color: var(--negro); border-color: var(--negro); }
+  .flow-end-rojo     { background: var(--granate-l); color: var(--granate); border-color: var(--granate); }
+  .flow-end-verde    { background: var(--verde-l);   color: var(--verde);   border-color: var(--verde); }
+  .flow-end-ambar    { background: var(--ambar-l);   color: var(--ambar);   border-color: var(--ambar); }
   .flow-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--gris);
-    font-size: 0.75rem;
-    padding: 0.15rem 0;
-    gap: 0;
-    line-height: 1;
+    display: flex; flex-direction: column; align-items: center;
+    color: var(--gris-piedra); font-size: 0.74rem; padding: 0.15rem 0; gap: 0; line-height: 1;
   }
-  .flow-arrow .arr-line { width: 2px; height: 18px; background: var(--gris-l); }
-  .flow-row {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    width: 100%;
-    justify-content: center;
-  }
-  .flow-branch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    flex: 1;
-    max-width: 200px;
+  .flow-arrow .arr-line { width: 2px; height: 18px; background: var(--gris-claro); }
+  .flow-row { display: flex; gap: 1rem; align-items: flex-start; width: 100%; justify-content: center; }
+  .flow-branch { display: flex; flex-direction: column; align-items: center; gap: 0; flex: 1; max-width: 200px; }
+
+  /* ── PIE ── */
+  footer {
+    text-align: center;
+    padding: 1.6rem 1.2rem 2.4rem;
+    font-size: 0.74rem;
+    color: var(--gris-piedra);
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
+  @media (max-width: 560px) {
     .desglose { grid-template-columns: 1fr; }
     .input-grid { grid-template-columns: 1fr; }
   }
@@ -451,12 +432,12 @@
 <body>
 
 <header>
-  <p class="eyebrow">Guía interactiva</p>
-  <h1>Sistema de Evaluación</h1>
-  <p>Convocatoria ordinaria de junio</p>
+  <p class="sello">Universitas Granatensis · MDXXXI</p>
+  <h1>Habilidades Cognitivas, evaluación 2027</h1>
+  <div class="rule"></div>
+  <p class="sub">Convocatoria ordinaria de junio · Prof. E. Madrid</p>
 </header>
 
-<!-- Barra de pesos -->
 <div class="pesos-bar-wrap">
   <div class="pesos-bar">
     <div class="seg seg-teoria">Teoría 70 %</div>
@@ -472,56 +453,48 @@
 
   <!-- ── REGLAS CLAVE ── -->
   <div class="card">
-    <div class="card-head">
-      <div class="icon icon-rojo">⚠️</div>
+    <div class="card-head"><div class="marca"></div>
       <h2>Reglas que condicionan todo</h2>
     </div>
     <div class="card-body">
       <div class="alerta alerta-roja">
-        <span class="alerta-icon">🚫</span>
-        <span><strong>Mínimo en el examen final:</strong> necesitas obtener al menos <strong>4 sobre 10</strong> en el examen final de teoría. Si no lo alcanzas, la asignatura queda suspensa y la nota del acta es directamente la nota del examen, sin sumar nada más.</span>
+        <span class="marcador">Mínimo</span>
+        <span><strong>Examen final:</strong> necesitas obtener al menos <strong>4 sobre 10</strong> en el examen final de teoría. Si no lo alcanzas, la asignatura queda suspensa y la nota del acta es directamente la nota del examen, sin sumar nada más.</span>
       </div>
-      <div class="alerta alerta-naranja">
-        <span class="alerta-icon">📋</span>
+      <div class="alerta alerta-ambar">
+        <span class="marcador">Acta</span>
         <span><strong>No presentado:</strong> si no te presentas al examen final, apareces en el acta como «No presentado» aunque tengas nota en prácticas o evaluación continua.</span>
       </div>
       <div class="alerta alerta-verde">
-        <span class="alerta-icon">✅</span>
-        <span><strong>Aprobado:</strong> la asignatura se supera cuando la suma de teoría y prácticas alcanza al menos <strong>5 puntos sobre 10</strong>.</span>
+        <span class="marcador">Aprobado</span>
+        <span>La asignatura se supera cuando la suma de teoría y prácticas alcanza al menos <strong>5 puntos sobre 10</strong>.</span>
       </div>
-      <div class="alerta alerta-azul">
-        <span class="alerta-icon">🔬</span>
-        <span><strong>Participación en experimentos:</strong> solo suma décimas si ya has aprobado (≥ 5). Si no llegas al 5, estas décimas no se añaden.</span>
+      <div class="alerta alerta-neutra">
+        <span class="marcador">Extra</span>
+        <span><strong>Participación en experimentos:</strong> puedes sumar hasta 0,5 puntos a la nota final, 0,1 por experimento. Solo se suman si tu nota final es ≥ 5.</span>
       </div>
     </div>
   </div>
 
   <!-- ── TEORÍA ── -->
   <div class="card">
-    <div class="card-head">
-      <div class="icon icon-naranja">📖</div>
+    <div class="card-head"><div class="marca"></div>
       <h2>Bloque de Teoría</h2>
       <span class="pts">hasta 7 pts</span>
     </div>
     <div class="card-body">
       <div class="formula-box">
-        <div style="font-size:0.82rem; color:var(--gris);">Nota de Teoría =</div>
-        <div class="formula">(Examen Final / 10) × (7 − EC) &nbsp;+&nbsp; EC</div>
+        <div style="font-size:0.82rem; color:var(--gris-piedra);">Nota de Teoría =</div>
+        <div class="formula">(Examen Final / 10) × (7 − EC) + EC</div>
         <small>donde EC = puntos de evaluación continua (máx. 3) · Examen Final calificado sobre 10</small>
       </div>
       <table class="comp-table">
         <thead>
-          <tr>
-            <th>Componente</th>
-            <th>Detalles</th>
-            <th class="pts-col">Máx.</th>
-          </tr>
+          <tr><th>Componente</th><th>Detalles</th><th class="pts-col">Máx.</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Examen final de junio</strong></td>
-            <td>Opción múltiple + preguntas cortas. Calificado sobre 10. Su peso en la nota varía según lo acumulado en EC.</td>
-            <td class="pts-col">variable</td>
+            <td colspan="3" style="padding-top:0.9rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Evaluación continua</td>
           </tr>
           <tr>
             <td><strong>Cuestionarios por tema</strong></td>
@@ -534,8 +507,24 @@
             <td class="pts-col">0,6 pts</td>
           </tr>
           <tr class="total-row">
-            <td colspan="2">Total Evaluación Continua</td>
+            <td colspan="2">Total Evaluación Continua (EC)</td>
             <td class="pts-col">3,0 pts</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="padding-top:1.1rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--granate); font-weight:600; border-bottom:none;">Examen final</td>
+          </tr>
+          <tr>
+            <td><strong>Examen final de junio</strong></td>
+            <td>Opción múltiple + preguntas cortas. Calificado sobre 10. Su peso en la nota varía según lo acumulado en evaluación continua.</td>
+            <td class="pts-col">variable</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Tramo que reparte el examen</td>
+            <td class="pts-col">7 − EC</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Total Teoría</td>
+            <td class="pts-col">7,00</td>
           </tr>
         </tbody>
       </table>
@@ -544,59 +533,27 @@
 
   <!-- ── PRÁCTICAS ── -->
   <div class="card">
-    <div class="card-head">
-      <div class="icon icon-verde">🧪</div>
+    <div class="card-head"><div class="marca"></div>
       <h2>Bloque de Prácticas</h2>
       <span class="pts">hasta 3 pts</span>
     </div>
     <div class="card-body">
-      <div class="alerta alerta-azul">
-        <span class="alerta-icon">ℹ️</span>
+      <div class="alerta alerta-neutra">
+        <span class="marcador">Condición</span>
         <span>Estas actividades solo cuentan si obtienes <strong>≥ 4 sobre 10</strong> en el examen final de teoría.</span>
       </div>
       <table class="comp-table">
         <thead>
-          <tr>
-            <th>Actividad</th>
-            <th>Evaluación</th>
-            <th class="pts-col">Pts</th>
-          </tr>
+          <tr><th>Actividad</th><th>Evaluación</th><th class="pts-col">Pts</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>Actividad 1</strong></td>
-            <td><span class="badge badge-participacion">Participación</span></td>
-            <td class="pts-col">0,10</td>
-          </tr>
-          <tr>
-            <td><strong>Actividad 2</strong></td>
-            <td><span class="badge badge-participacion">Participación</span></td>
-            <td class="pts-col">0,10</td>
-          </tr>
-          <tr>
-            <td><strong>Actividad 3</strong></td>
-            <td><span class="badge badge-informe">Informe grupal (3–4 estudiantes)</span></td>
-            <td class="pts-col">0,80</td>
-          </tr>
-          <tr>
-            <td><strong>Actividad 4</strong></td>
-            <td><span class="badge badge-examen">Examen presencial</span></td>
-            <td class="pts-col">0,90</td>
-          </tr>
-          <tr>
-            <td><strong>Actividad 5</strong></td>
-            <td><span class="badge badge-examen">Examen presencial</span></td>
-            <td class="pts-col">0,90</td>
-          </tr>
-          <tr>
-            <td><strong>Actividad 6</strong></td>
-            <td><span class="badge badge-participacion">Participación</span></td>
-            <td class="pts-col">0,20</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="2">Total Prácticas</td>
-            <td class="pts-col">3,00</td>
-          </tr>
+          <tr><td><strong>Actividad 1</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
+          <tr><td><strong>Actividad 2</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,10</td></tr>
+          <tr><td><strong>Actividad 3</strong></td><td><span class="badge badge-informe">Informe grupal (3–4 estudiantes)</span></td><td class="pts-col">0,80</td></tr>
+          <tr><td><strong>Actividad 4</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
+          <tr><td><strong>Actividad 5</strong></td><td><span class="badge badge-examen">Examen presencial</span></td><td class="pts-col">0,90</td></tr>
+          <tr><td><strong>Actividad 6</strong></td><td><span class="badge badge-participacion">Participación</span></td><td class="pts-col">0,20</td></tr>
+          <tr class="total-row"><td colspan="2">Total Prácticas</td><td class="pts-col">3,00</td></tr>
         </tbody>
       </table>
     </div>
@@ -604,8 +561,7 @@
 
   <!-- ── DIAGRAMA DE DECISIÓN ── -->
   <div class="card">
-    <div class="card-head">
-      <div class="icon icon-azul">🗺️</div>
+    <div class="card-head"><div class="marca"></div>
       <h2>Árbol de decisión: ¿qué nota obtengo?</h2>
     </div>
     <div class="card-body">
@@ -620,8 +576,8 @@
             <div class="flow-arrow"><span>Sí</span><div class="arr-line"></div>▼</div>
             <div class="flow-node flow-diamond">¿Nota examen ≥ 4?</div>
             <div class="flow-row" style="width:100%;">
-              <div class="flow-branch">
-                <div class="flow-arrow"><span>  No</span><div class="arr-line"></div>  ▼</div>
+              <div class="flow-branch" style="margin-left:2rem;">
+                <div class="flow-arrow"><span>No</span><div class="arr-line"></div>▼</div>
                 <div class="flow-node flow-end-rojo">Suspenso. Acta = nota del examen</div>
               </div>
               <div class="flow-branch">
@@ -630,7 +586,7 @@
                 <div class="flow-row" style="width:100%;">
                   <div class="flow-branch">
                     <div class="flow-arrow"><span>No</span><div class="arr-line"></div>▼</div>
-                    <div class="flow-node flow-end-naranja">Suspenso. Suma T + P (sin experimentos)</div>
+                    <div class="flow-node flow-end-ambar">Suspenso. Suma T + P (sin experimentos)</div>
                   </div>
                   <div class="flow-branch">
                     <div class="flow-arrow"><span>Sí</span><div class="arr-line"></div>▼</div>
@@ -653,7 +609,6 @@
     </div>
     <div class="calc-body">
 
-      <!-- Examen final -->
       <div>
         <div class="input-group-label">Examen final de teoría (sobre 10)</div>
         <div class="input-grid" style="grid-template-columns: 1fr;">
@@ -667,7 +622,6 @@
 
       <hr class="calc-divider">
 
-      <!-- Evaluación continua -->
       <div>
         <div class="input-group-label">Evaluación continua (teoría)</div>
         <div class="input-grid">
@@ -686,7 +640,6 @@
 
       <hr class="calc-divider">
 
-      <!-- Prácticas -->
       <div>
         <div class="input-group-label">Prácticas</div>
         <div class="input-grid">
@@ -720,7 +673,22 @@
 
       <hr class="calc-divider">
 
-      <!-- Resultado -->
+      <div>
+        <div class="input-group-label">Participación en experimentos</div>
+        <div class="input-grid" style="grid-template-columns: 1fr;">
+          <div class="input-item">
+            <label>Experimentos realizados (0,1 pts c/u, máx. 0,5 pts)</label>
+            <input type="range" id="r_exp" min="0" max="0.5" step="0.1" value="0">
+            <div class="val-display" id="d_exp">0.00</div>
+          </div>
+        </div>
+        <div style="font-size:0.78rem; color:#a8a5a0; margin-top:0.5rem;">
+          Solo se suman si tu nota final (sin experimentos) es ≥ 5.
+        </div>
+      </div>
+
+      <hr class="calc-divider">
+
       <div class="resultado-wrap">
         <div class="input-group-label">Resultado</div>
 
@@ -735,24 +703,25 @@
             <div class="d-val" id="res_prac">—</div>
             <div class="d-max">sobre 3 pts</div>
           </div>
+          <div class="desglose-item">
+            <div class="d-label">Experimentos</div>
+            <div class="d-val" id="res_exp">—</div>
+            <div class="d-max" id="res_exp_nota">no se suman</div>
+          </div>
         </div>
 
-        <!-- Barra visual -->
         <div style="position:relative;">
           <div class="nota-bar-outer" id="bar_outer">
             <div class="nota-bar-fill" id="bar_fill">—</div>
-            <!-- Marcador 4 -->
             <div class="marker" style="left:40%;" id="m4"></div>
             <div class="marker-label" style="left:calc(40% + 5px);" id="m4l">mín. 4</div>
-            <!-- Marcador 5 -->
             <div class="marker" style="left:50%;" id="m5"></div>
             <div class="marker-label" style="left:calc(50% + 5px);" id="m5l">aprobado 5</div>
           </div>
         </div>
 
-        <!-- Veredicto -->
         <div class="veredicto" id="veredicto">
-          <span class="v-icon" id="v_icon">⏳</span>
+          <span class="v-marcador" id="v_marcador">—</span>
           <div class="v-text">
             <strong id="v_title">—</strong>
             <span id="v_desc">Ajusta los controles para ver el resultado.</span>
@@ -765,10 +734,12 @@
 
 </main>
 
+<footer>
+  Universidad de Granada · Habilidades Cognitivas · Sistema de evaluación, curso 2026–2027
+</footer>
+
 <script>
-const ids = ['r_examen','r_cues','r_asis','r_p12','r_p3','r_p4','r_p5','r_p6'];
-const disp = {'r_examen':'d_examen','r_cues':'d_cues','r_asis':'d_asis',
-               'r_p12':'d_p12','r_p3':'d_p3','r_p4':'d_p4','r_p5':'d_p5','r_p6':'d_p6'};
+const ids = ['r_examen','r_cues','r_asis','r_p12','r_p3','r_p4','r_p5','r_p6','r_exp'];
 
 function fmt(v, dec=2){ return parseFloat(v).toFixed(dec); }
 
@@ -781,8 +752,8 @@ function update(){
   const p4     = parseFloat(document.getElementById('r_p4').value);
   const p5     = parseFloat(document.getElementById('r_p5').value);
   const p6     = parseFloat(document.getElementById('r_p6').value);
+  const exp    = parseFloat(document.getElementById('r_exp').value);
 
-  // Actualizar displays
   document.getElementById('d_examen').textContent = fmt(examen,1);
   document.getElementById('d_cues').textContent   = fmt(cues);
   document.getElementById('d_asis').textContent   = fmt(asis);
@@ -791,6 +762,7 @@ function update(){
   document.getElementById('d_p4').textContent     = fmt(p4);
   document.getElementById('d_p5').textContent     = fmt(p5);
   document.getElementById('d_p6').textContent     = fmt(p6);
+  document.getElementById('d_exp').textContent    = fmt(exp);
 
   const ec        = Math.min(cues + asis, 3);
   const pesoExamen= 7 - ec;
@@ -799,46 +771,60 @@ function update(){
 
   const elTeo  = document.getElementById('res_teoria');
   const elPrac = document.getElementById('res_prac');
+  const elExp  = document.getElementById('res_exp');
+  const elExpN = document.getElementById('res_exp_nota');
   const barFill= document.getElementById('bar_fill');
   const verd   = document.getElementById('veredicto');
-  const vIcon  = document.getElementById('v_icon');
+  const vMarc  = document.getElementById('v_marcador');
   const vTitle = document.getElementById('v_title');
   const vDesc  = document.getElementById('v_desc');
 
   if(examen < 4){
-    // Suspenso por mínimo
     elTeo.textContent  = '—';
     elPrac.textContent = '—';
+    elExp.textContent  = '—';
+    elExpN.textContent = 'no aplica';
 
     const pct = Math.min(examen/10*100, 100);
     barFill.style.width      = pct + '%';
-    barFill.style.background = '#d94f3d';
+    barFill.style.background = '#7a0019';
     barFill.textContent      = fmt(examen,1) + ' / 10';
 
     verd.className = 'veredicto veredicto-suspenso-min';
-    vIcon.textContent  = '🚫';
+    vMarc.textContent  = 'Suspenso';
     vTitle.textContent = 'Suspenso por mínimo';
     vDesc.textContent  = `El examen final (${fmt(examen,1)}) no alcanza el 4 mínimo. La nota en acta es ${fmt(examen,1)}. No se suman prácticas ni evaluación continua.`;
   } else {
     elTeo.textContent  = fmt(notaTeo) + ' pts';
     elPrac.textContent = fmt(notaPrac) + ' pts';
 
-    const total = notaTeo + notaPrac;
-    const pct   = Math.min(total/10*100, 100);
+    const totalBase = notaTeo + notaPrac;
+    const aprobado  = totalBase >= 5;
+    const expSumado = aprobado ? exp : 0;
+    const total     = totalBase + expSumado;
+
+    elExp.textContent  = aprobado ? ('+' + fmt(exp)) : '—';
+    elExpN.textContent = aprobado ? 'sumados' : 'no se suman (nota < 5)';
+
+    const pct = Math.min(total/10*100, 100);
     barFill.style.width = pct + '%';
 
-    if(total >= 5){
-      barFill.style.background = '#4caf82';
+    if(aprobado){
+      barFill.style.background = '#2d6a4f';
       verd.className = 'veredicto veredicto-aprobado';
-      vIcon.textContent  = '✅';
-      vTitle.textContent = `Aprobado · ${fmt(total)} / 10`;
-      vDesc.textContent  = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. Si participas en experimentos, podrás subir décimas adicionales.`;
+      vMarc.textContent  = 'Aprobado';
+      vTitle.textContent = `${fmt(total)} / 10`;
+      if(exp > 0){
+        vDesc.textContent = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts · Experimentos: +${fmt(exp)} pts. Nota base ${fmt(totalBase)} + experimentos = ${fmt(total)}.`;
+      } else {
+        vDesc.textContent = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. Puedes sumar hasta 0,5 pts más participando en experimentos.`;
+      }
     } else {
-      barFill.style.background = '#e07b39';
+      barFill.style.background = '#b8762e';
       verd.className = 'veredicto veredicto-suspenso';
-      vIcon.textContent  = '⚠️';
-      vTitle.textContent = `Suspenso · ${fmt(total)} / 10`;
-      vDesc.textContent  = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. No llegas al 5 mínimo. Las décimas de experimentos no se suman.`;
+      vMarc.textContent  = 'Suspenso';
+      vTitle.textContent = `${fmt(total)} / 10`;
+      vDesc.textContent  = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. No llegas al 5 mínimo, así que los experimentos (${fmt(exp)} pts) no se suman.`;
     }
     barFill.textContent = fmt(total,2) + ' / 10';
   }
