@@ -539,7 +539,7 @@
             <div class="flow-row" style="width:100%;">
               <div class="flow-branch" style="margin-left:2rem;">
                 <div class="flow-arrow"><span>No</span><div class="arr-line"></div>▼</div>
-                <div class="flow-node flow-end-rojo">Suspenso. Acta = nota del examen</div>
+                <div class="flow-node flow-end-rojo">Suspenso, suma de los componentes, máx. 4.9</div>
               </div>
               <div class="flow-branch">
                 <div class="flow-arrow"><span>Sí</span><div class="arr-line"></div>▼</div>
@@ -547,7 +547,7 @@
                 <div class="flow-row" style="width:100%;">
                   <div class="flow-branch">
                     <div class="flow-arrow"><span>No</span><div class="arr-line"></div>▼</div>
-                    <div class="flow-node flow-end-ambar">Suspenso. Suma T + P (sin experimentos)</div>
+                    <div class="flow-node flow-end-ambar">Suspenso</div>
                   </div>
                   <div class="flow-branch">
                     <div class="flow-arrow"><span>Sí</span><div class="arr-line"></div>▼</div>
@@ -562,7 +562,6 @@
     </div>
   </div>
 
-  <!-- ── TEORÍA ── -->
   <div class="card">
     <div class="card-head"><div class="marca"></div>
       <h2>Teoría</h2>
@@ -804,6 +803,23 @@
     </div>
   </div>
 
+  <!-- ── NOTA NORMATIVA 4,9 ── -->
+  <div class="card">
+    <div class="card-head"><div class="marca"></div>
+      <h2>Cláusula normativa: tope de 4,9 en acta</h2>
+    </div>
+    <div class="card-body">
+      <div class="alerta alerta-ambar">
+        <span class="marcador">Normativa UGR</span>
+        <span>Cuando no se supera el <strong>mínimo del examen de teoría (4/10)</strong>, la nota que figura en el acta es la suma de todas las fuentes de nota hasta un valor máximo de 4,9 puntos, aunque la suma aritmética real sea superior. Esta cláusula deriva de los artículos 7.2 y 22.2 del Texto consolidado de la Normativa de evaluación y calificación de los estudiantes de la UGR (BOUGR n.º 112, 9 de noviembre de 2016). Si no se llega al 5 global pero sí se superó el mínimo del examen, la nota en acta es la suma real sin tope.</span>
+      </div>
+      <div class="alerta alerta-neutra">
+        <span class="marcador">Ejemplo</span>
+        <span>Examen: 3,5/10 (no llega al mínimo de 4). EC acumulada: 2,8 pts, Prácticas: 2,1 pts. Suma real de componentes: 4,9+ pts. <strong>El acta reflejará como máximo 4,9</strong>, no la suma real.</span>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
@@ -883,17 +899,22 @@ function update(){
   const m4l    = document.getElementById('m4l');
 
   if(examen < 4){
+    // Mínimo del examen no superado: cláusula del 4,9 (art. 7.2 + art. 22.2 BOUGR nº 112).
+    // La nota en acta es la suma de todas las fuentes hasta un máximo de 4,9.
     elTeo.textContent  = '—';
     elPrac.textContent = '—';
     elExp.textContent  = '—';
     elExpN.textContent = 'no aplica';
 
-    const pct = Math.min(examen/10*100, 100);
+    // Suma real de todos los componentes (EC + examen + prácticas), topada en 4,9
+    const sumaReal = notaTeo + notaPrac;
+    const notaActa = Math.min(sumaReal, 4.9);
+
+    const pct = Math.min(notaActa/10*100, 100);
     barFill.style.width      = pct + '%';
     barFill.style.background = '#7a0019';
-    barFill.textContent      = fmt(examen,1) + ' / 10';
+    barFill.textContent      = fmt(notaActa,1) + ' / 10';
 
-    // El marcador del 4 solo aporta información si la barra no lo ha cubierto ya
     const ocultar4 = pct >= 40;
     m4.style.display  = ocultar4 ? 'none' : 'block';
     m4l.style.display = ocultar4 ? 'none' : 'block';
@@ -901,7 +922,10 @@ function update(){
     verd.className = 'veredicto veredicto-suspenso-min';
     vMarc.textContent  = 'Suspenso';
     vTitle.textContent = 'Suspenso por mínimo';
-    vDesc.textContent  = `El examen final (${fmt(examen,1)}) no alcanza el 4 mínimo. La nota en acta es ${fmt(examen,1)}. No se suman prácticas ni evaluación continua.`;
+    const infoTope = sumaReal > 4.9
+      ? ` Suma real de componentes: ${fmt(sumaReal,2)}, limitada a 4,9 por normativa UGR (art. 7.2 + art. 22.2, BOUGR nº 112).`
+      : '';
+    vDesc.textContent = `El examen final (${fmt(examen,1)}/10) no alcanza el mínimo de 4. No se suman prácticas ni evaluación continua. Nota en acta: ${fmt(notaActa,1)}.${infoTope}`;
   } else {
     elTeo.textContent  = fmt(notaTeo) + ' pts';
     elPrac.textContent = fmt(notaPrac) + ' pts';
@@ -917,7 +941,6 @@ function update(){
     const pct = Math.min(total/10*100, 100);
     barFill.style.width = pct + '%';
 
-    // El marcador del 4 solo aporta información si la barra no lo ha cubierto ya
     const ocultar4 = pct >= 40;
     m4.style.display  = ocultar4 ? 'none' : 'block';
     m4l.style.display = ocultar4 ? 'none' : 'block';
@@ -933,11 +956,13 @@ function update(){
         vDesc.textContent = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. Puedes sumar hasta 0,5 pts más participando en experimentos.`;
       }
     } else {
+      // Suspenso por no llegar al 5 global (pero sí se superó el mínimo del examen):
+      // la nota en acta es la suma real, sin tope de 4,9.
       barFill.style.background = '#b8762e';
       verd.className = 'veredicto veredicto-suspenso';
       vMarc.textContent  = 'Suspenso';
       vTitle.textContent = `${fmt(total)} / 10`;
-      vDesc.textContent  = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. No llegas al 5 mínimo, así que los experimentos (${fmt(exp)} pts) no se suman.`;
+      vDesc.textContent  = `Teoría: ${fmt(notaTeo)} pts · Prácticas: ${fmt(notaPrac)} pts. No alcanzas el 5 mínimo. Nota en acta: ${fmt(total)}.`;
     }
     barFill.textContent = fmt(total,2) + ' / 10';
   }
